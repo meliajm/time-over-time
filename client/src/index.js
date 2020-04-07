@@ -8,17 +8,24 @@ let tasks = []
 let addTask = false
 
 document.addEventListener("DOMContentLoaded", () => {
+    console.log(addTask)
     const addTaskButton = document.querySelector('#new-task-button')
     const taskForm = document.querySelector('.container')
     addTaskButton.addEventListener("click", () => {
+        console.log(addTask)
+
     addTask = !addTask;
       if (addTask) {
+        console.log(addTask)
+
         taskForm.style.display = "block";
       } else {
+        console.log(addTask)
+
         taskForm.style.display = "none";
       }
     });
-  });
+   });
 
 
 const getFormInfo = () => document.querySelector('.add-task-form')
