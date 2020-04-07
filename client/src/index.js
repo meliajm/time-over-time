@@ -1,10 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
     getTasks()
     getFormInfo().addEventListener('submit', createNewTask)
-    showTaskFrom().addEventListener('click', )
 })
 
 let tasks = []
+
+let addTask = false
+
+document.addEventListener("DOMContentLoaded", () => {
+    const addTaskButton = document.querySelector('#new-task-button')
+    const taskForm = document.querySelector('.container')
+    addTaskButton.addEventListener("click", () => {
+    addTask = !addTask;
+      if (addTask) {
+        taskForm.style.display = "block";
+      } else {
+        taskForm.style.display = "none";
+      }
+    });
+  });
+
 
 const getFormInfo = () => document.querySelector('.add-task-form')
 const getTaskList = () => document.querySelector('div.task-list')
