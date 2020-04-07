@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    getTasks();
+    getTasks()
     getFormInfo().addEventListener('submit', createNewTask)
+    showTaskFrom().addEventListener('click', )
 })
 
 let tasks = []
@@ -91,3 +92,8 @@ function createNewTask(e) {
         renderTask(task)
     })
 }
+
+// add event listener to after dom loaded - show create new task form
+// click on create new task button
+
+
