@@ -6,26 +6,16 @@ document.addEventListener('DOMContentLoaded', function() {
 let tasks = []
 
 let addTask = false
-
-document.addEventListener("DOMContentLoaded", () => {
-    console.log(addTask)
-    const addTaskButton = document.querySelector('#new-task-button')
-    const taskForm = document.querySelector('.container')
-    addTaskButton.addEventListener("click", () => {
-        console.log(addTask)
-
+const addTaskButton = document.querySelector('#new-task-button')
+const taskForm = document.querySelector('.container')
+addTaskButton.addEventListener("click", () => {
     addTask = !addTask;
-      if (addTask) {
-        console.log(addTask)
-
+        if (addTask) {
         taskForm.style.display = "block";
-      } else {
-        console.log(addTask)
-
+        } else {
         taskForm.style.display = "none";
-      }
-    });
-   });
+        }
+});
 
 
 const getFormInfo = () => document.querySelector('.add-task-form')
@@ -36,7 +26,6 @@ const getCategoryName = () => document.getElementById('category').value
 const getTaskByWhen = () => document.getElementById('by_when').value
 
 function card(task) {
-    console.log(task)
     return `
     <div class="card">
         <div class="card-content">
@@ -113,9 +102,24 @@ function createNewTask(e) {
         tasks.push(task)
         renderTask(task)
     })
+    .then(clearNewTaskForm())
+    .then(toggleNewFormButton)
 }
 
-// add event listener to after dom loaded - show create new task form
-// click on create new task button
+function toggleNewFormButton() {
+    addTask = !addTask;
+      if (addTask) {
+        taskForm.style.display = "block";
+      } else {
+        taskForm.style.display = "none";
+      }
+  }
 
+function clearNewTaskForm() {
+    const inputTextAll = document.querySelectorAll(".input-text")
+    inputTextAll.forEach( inputText => inputText.value = "")
+    // for (let i=0; i<inputTextAll.length; i++) {
+    //     inputTextAll[i].value = ""
+    // }
+  }
 
