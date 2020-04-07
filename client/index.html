@@ -9,14 +9,18 @@
     <div class="container">
         <form class="add-task-form">
             <h2>Create your task!</h2>
-            <input type="text" name="content" placeholder="Enter your task's content" value="" class="input-text">
+            <input type="text" name="content" placeholder="Your task's content" value="" class="input-text" id="content">
             <br>
-            <input type="text" name="by_when" placeholder="Enter your task's by when" value="" class="input-text">
+            <input type="text" name="category" placeholder="Your task's category" value="" class="input-text" id="category">
             <br>
-            <input type="text" name="category" placeholder="Enter your task's category" value="" class="input-text">
+            <input type="date" name="by_when" value="" class="input-text" id="by_when">
             <br>
             <input type="submit" name="submit" value="Create a New Task" class="submit">        
         </form>
+    </div>
+
+    <div class="task-list">
+        <h2>Task List</h2>
     </div>
         
     <script src='src/index.js'></script>

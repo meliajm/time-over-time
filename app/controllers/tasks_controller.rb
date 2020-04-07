@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
 
-    render json: @tasks
+    render json: @tasks, include: [:category]
   end
 
   # GET /tasks/1
@@ -15,10 +15,14 @@ class TasksController < ApplicationController
 
   # POST /tasks
   def create
-    @task = Task.new(task_params)
+    @category = Category.find_or_create_by(name: category_params[:name])
+    # @task = Task.new(task_params)
+    @task = @category.tasks.build(task_params)
+
+
 
     if @task.save
-      render json: @task, status: :created, location: @task
+      render json: @task, include: [:category], status: :created, location: @task
     else
       render json: @task.errors, status: :unprocessable_entity
     end
@@ -42,6 +46,10 @@ class TasksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])
+    end
+
+    def category_params
+      params.require(:category).permit(:name)
     end
 
     # Only allow a trusted parameter "white list" through.

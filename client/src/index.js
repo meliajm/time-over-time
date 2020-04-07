@@ -6,14 +6,14 @@ document.addEventListener('DOMContentLoaded', function() {
 let tasks = []
 
 const getFormInfo = () => document.querySelector('.add-task-form')
-// not sure if this is needed below
-const getTaskList = () => document.querySelector('')
+const getTaskList = () => document.querySelector('div.task-list')
 
-const getTaskName = () => document.getElementById('').value 
-const getCategory = () => document.getElementById('').value
-const getContent = () => document.getElementById('').value
+const getTaskContent = () => document.getElementById('content').value 
+const getCategoryName = () => document.getElementById('category').value
+const getTaskByWhen = () => document.getElementById('by_when').value
 
 function card(task) {
+    console.log(task)
     return `
     <div class="card">
         <div class="card-content">
@@ -26,8 +26,6 @@ function card(task) {
 }
 
 function getTasks() {
-    // fetch, sends a GET request by default
-  
     fetch('http://localhost:3000/tasks')
       .then(function (response) {
         if (response.status !== 200) {
@@ -47,13 +45,49 @@ function renderTasks() {
 }
 
 function renderTask(task) {
-    get???
+    getTaskList().innerHTML += card(task)
 
 }
 
 function createNewTask(e) {
 
     e.preventDefault()
-    
-}
+    /* 
+    strong params:
+    {
+        category: {
+            name: 'Mental Health'
+        },
+        task: {
+            content: 'Go to grocery',
+            by_when: '2020-06-30T20:56:36.024Z'
+        }
+    }
+    */
 
+    const categoryName = getCategoryName()
+    const taskContent = getTaskContent()
+    const taskByWhen = getTaskByWhen()
+
+    let strongParams = {
+        category: {name: categoryName},
+        task: {
+            content: taskContent,
+            by_when: taskByWhen
+        }
+    }
+
+    fetch('http://localhost:3000/tasks', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(strongParams)
+    })
+    .then(response => response.json())
+    .then(task => {
+        tasks.push(task)
+        renderTask(task)
+    })
+}
