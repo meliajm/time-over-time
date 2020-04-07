@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
 })
 
 let tasks = []
-let categories = []
 
 let addTask = false
 const addTaskButton = document.querySelector('#new-task-button')
@@ -13,7 +12,6 @@ const taskForm = document.querySelector('.container')
 addTaskButton.addEventListener("click", () => {
     toggleNewFormButton()
 });
-
 
 const getFormInfo = () => document.querySelector('.add-task-form')
 const getTaskList = () => document.querySelector('div.task-list')
@@ -67,21 +65,9 @@ function renderTasks() {
 
 function renderTask(task) {
     getTaskList().innerHTML += card(task)
-    // add event listener to completed button
-    const btn = document.querySelector('.completed-button')
-    btn.addEventListener('click', completeTask)
-    // add event listener to all completed buttons not just first one
-    // debugger
+    const btns = document.querySelectorAll('.completed-button')
+    btns.forEach(btn => btn.addEventListener('click', completeTask))
 }
-
-function renderCategories() {
-    categories.forEach(category => renderCategory(category))
-}
-
-function renderCategory(category) {
-    getTaskList().innerHTML += card(category)
-}
-
 
 function createNewTask(e) {
 
