@@ -27,11 +27,10 @@ function card(task) {
             <p>Content: ${task.content}</p>
             <p>By when: ${task.by_when}</p>
             <p>Category: ${task.category.name}</p>
-            <button class="completed-button" data-id="undefined">Completed!</button>
-            <button class="delete-button" data-id="undefined">Delete</button>
+            <button class="completed-button" data-id=${task.id}>Completed!</button>
+            <button class="delete-button" data-id=${task.id}>Delete</button>
         </div>
-    </div>
-    `
+    </div>`
 }
 
 
@@ -117,3 +116,45 @@ function clearNewTaskForm() {
     const inputTextAll = document.querySelectorAll(".input-text")
     inputTextAll.forEach( inputText => inputText.value = "")
 }
+
+// complete button 
+
+
+
+
+/*
+when user clicks on completed button, card or task changes to new color
+triggered by click
+when can be trigger dom loaded
+*/
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.card-content').forEach(elem => addEventListener('click', handleClick))
+})
+
+function colorTask(cardContent) {
+    cardContent.classList.add('completed-task')
+  }
+  
+function clearTaskColor(cardContent) {
+    cardContent.classList.remove('completed-task')
+}
+
+function handleClick(e) {
+    mimicServerCall()
+    .then(response => {
+      if (e.target.classList !== 'completed-task') {
+        colorTask(e.target)
+      } else {
+        clearTaskColor(e.target)
+      }  
+    })
+    .catch((error) => {
+      showError()
+    })
+}
+
+
+
+
+// delete action -- destroy

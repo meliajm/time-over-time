@@ -1,3 +1,30 @@
 .container {
   display: none;
 }
+
+.card {
+  text-align: center;
+  border: rgb(0, 0, 0) solid 5px;
+  padding: 2rem;
+  width: 15rem;
+  height: 15rem;
+  display: inline-grid;
+  margin: 2rem 2rem;
+}
+
+button:hover {
+  background-color: whitesmoke;
+  border: #3409f0 solid 1px;
+  color: #3409f0;
+}
+
+.submit:hover {
+  background-color: whitesmoke;
+  border: #3409f0 solid 1px;
+  color: #3409f0;
+}
+
+.completed-task {
+  color: blue;
+}
+
