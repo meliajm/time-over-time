@@ -1,3 +1,13 @@
+document.addEventListener('DOMContentLoaded', function() {
+    getTasks();
+    getFormInfo().addEventListener('submit', createNewTask)
+})
+
+let tasks = []
+
+const getFormInfo = () => document.querySelector('.add-task-form')
+// not sure if this is needed
+const getTaskList = () => document.querySelector('') 
 function getTasks() {
     // fetch, sends a GET request by default
   
