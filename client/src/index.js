@@ -9,12 +9,7 @@ let addTask = false
 const addTaskButton = document.querySelector('#new-task-button')
 const taskForm = document.querySelector('.container')
 addTaskButton.addEventListener("click", () => {
-    addTask = !addTask;
-        if (addTask) {
-        taskForm.style.display = "block";
-        } else {
-        taskForm.style.display = "none";
-        }
+    toggleNewFormButton()
 });
 
 
@@ -32,10 +27,13 @@ function card(task) {
             <p>Content: ${task.content}</p>
             <p>By when: ${task.by_when}</p>
             <p>Category: ${task.category.name}</p>
+            <button class="completed-button" data-id="undefined">Completed!</button>
+            <button class="delete-button" data-id="undefined">Delete</button>
         </div>
     </div>
     `
 }
+
 
 function getTasks() {
     fetch('http://localhost:3000/tasks')
@@ -103,7 +101,7 @@ function createNewTask(e) {
         renderTask(task)
     })
     .then(clearNewTaskForm())
-    .then(toggleNewFormButton)
+    .then(toggleNewFormButton())
 }
 
 function toggleNewFormButton() {
@@ -113,13 +111,9 @@ function toggleNewFormButton() {
       } else {
         taskForm.style.display = "none";
       }
-  }
+}
 
 function clearNewTaskForm() {
     const inputTextAll = document.querySelectorAll(".input-text")
     inputTextAll.forEach( inputText => inputText.value = "")
-    // for (let i=0; i<inputTextAll.length; i++) {
-    //     inputTextAll[i].value = ""
-    // }
-  }
-
+}
