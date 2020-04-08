@@ -55,6 +55,7 @@ function cardWithColor(task) {
     </div>`   
 }
 
+// get tasks 
 function getTasks() {
     Api.get('/tasks')
       .then(function (data) {
@@ -69,14 +70,17 @@ function renderTasks() {
 }
 
 function renderTask(task) {
+    
     const bigCard = document.getElementById(task.get_date) || createBigCard(task.get_date)
-    if (task.completed){
+    // console.log(task.created_at)
+    // console.log(task.get_date)
+    if (task.completed) {
         bigCard.innerHTML += cardWithColor(task)
     } else {
         bigCard.innerHTML += card(task)
     }
 
-    console.log(task)
+    // console.log(task)
     const btns = document.querySelectorAll('.completed-button')
     btns.forEach(btn => btn.addEventListener('click', completeTask))
     const deleteButton = document.querySelectorAll('.delete-button')
@@ -85,11 +89,14 @@ function renderTask(task) {
 
 function createBigCard(taskGetDate) {
     bigCard = document.createElement('div')
+    // console.log(task.created_at)
     bigCard.id = taskGetDate
     bigCard.classList.add('big-card')
     getTaskList().appendChild(bigCard)
     return bigCard
 }
+
+// create new task
 
 function createNewTask(e) {
     e.preventDefault()
@@ -112,7 +119,7 @@ function createNewTask(e) {
     })
     }
     
-
+// new task form display
 function getAllCategories() {
     Api.get('/categories')
       .then(function (json) {
@@ -156,8 +163,6 @@ function completeTask(event) {
         "completed": true
         }
       )
-      
-   
       .then(function (json) {
         renderCompleted(json)
       })

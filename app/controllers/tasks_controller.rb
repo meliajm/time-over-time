@@ -22,7 +22,7 @@ class TasksController < ApplicationController
 
 
     if @task.save
-      render json: @task, include: [:category], status: :created, location: @task
+      render json: @task, include: [:category], status: :created, location: @task, methods: :get_date
     else
       render json: @task.errors, status: :unprocessable_entity
     end
@@ -31,7 +31,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   def update
     if @task.update(task_params)
-      render json: @task
+      render json: @task, methods: :get_date
     else
       render json: @task.errors, status: :unprocessable_entity
     end
