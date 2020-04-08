@@ -59,3 +59,7 @@ button:hover {
 #hide-complete {
   display: none
 }
+
+#hide-delete {
+  display: none
+}

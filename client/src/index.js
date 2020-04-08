@@ -157,25 +157,20 @@ function clearNewTaskForm() {
 function deleteTask(event) {
     const eventID = event.target.dataset.id 
     Api.delete(`/tasks/${eventID}`)
-    .then(function (json) {
-    // console.log(json)
-    removeTaskFromDOM(json)
-    })
-}
-
-function removeTaskFromDOM(jsonTask) {
-    const allDeleteButtons = document.querySelectorAll('.delete-button')
-    for (let i=0; i<allDeleteButtons.length; i++) {
-        if (parseInt(allDeleteButtons[i].dataset.id) === jsonTask.id) {
-            allDeleteButtons[i].parentElement.display = none
+    .then(function (json){
+        const allDeleteButtons = document.querySelectorAll('.delete-button')
+        for (let i=0; i<allDeleteButtons.length; i++) {
+            if (allDeleteButtons[i].dataset.id === eventID) {
+            allDeleteButtons[i].parentElement.id = 'hide-complete'
         }
       }
+    }) 
 }
 
 function completeTask(event) {
     const eventID = event.target.dataset.id
     const completedBool = event.target.previousElementSibling.innerText.split(' ')[1]   
-    console.log(completedBool)
+    // console.log(completedBool)
     let configObj = {
       method: "PATCH",
       headers: {
