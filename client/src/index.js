@@ -1,4 +1,5 @@
 let tasks = []
+const categoryNames = []
 
 let addTask = false
 const addTaskButton = document.querySelector('#new-task-button')
@@ -35,6 +36,19 @@ function card(task) {
     </div>`   
 }
 
+function cardWithColor(task) {
+    return `
+    <div class="card">
+        <div class="card-content completed-task">
+            <p>Content: ${task.content}</p>
+            <p>By when: ${task.by_when}</p>
+            <p>Category: ${task.category.name}</p>
+            <h5 id="hide-complete">Completed: ${task.completed} </h5>
+            <button class="completed-button" data-id=${task.id}>Completed!</button>
+            <button class="delete-button" data-id=${task.id}>Delete</button>
+        </div>
+    </div>`   
+}
 
 function getTasks() {
     fetch('http://localhost:3000/tasks')
@@ -48,6 +62,10 @@ function getTasks() {
         tasks = data;
         renderTasks()
       })
+      .then(function (data) {
+        
+      }
+      )
       .catch(errors => console.log(errors));
 }
 
@@ -58,11 +76,24 @@ function renderTasks() {
 function renderTask(task) {
     // find or create big card by day
     const bigCard = document.getElementById(task.get_date) || createBigCard(task.get_date)
-    // const bigCard = findOrCreateBigCard(task.get_date)
     // attach task to big card
-    bigCard.innerHTML += card(task)
+    if (task.completed){
+        bigCard.innerHTML += cardWithColor(task)
+    } else {
+        bigCard.innerHTML += card(task)
+    }
+    // if (task.completed) {
+    //     colorTask()
+    // }
+    console.log(task)
+    // renderCompletedOnLoadingDOM(task)
     const btns = document.querySelectorAll('.completed-button')
     btns.forEach(btn => btn.addEventListener('click', completeTask))
+    // if (task.completed) {
+    //     colorTask(task)
+    // }
+    // cardContent.classList.add('completed-task')
+
 }
 
 function createBigCard(taskGetDate) {
@@ -95,7 +126,6 @@ function createNewTask(e) {
     })
     }
     
-const categoryNames = []
 
 function getAllCategories() {
     fetch('http://localhost:3000/categories')
@@ -165,6 +195,8 @@ function completeTask(event) {
       }
     }
   }
+
+ 
 
   function colorTask(cardContent) {
       cardContent.classList.add('completed-task')
