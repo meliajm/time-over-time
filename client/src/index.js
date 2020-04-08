@@ -27,7 +27,7 @@ function card(task) {
             <p>Content: ${task.content}</p>
             <p>By when: ${task.by_when}</p>
             <p>Category: ${task.category.name}</p>
-            <h5>Completed: ${task.completed} </h5>
+            <h5 id="hide-complete">Completed: ${task.completed} </h5>
             <button class="completed-button" data-id=${task.id}>Completed!</button>
             <button class="delete-button" data-id=${task.id}>Delete</button>
         </div>
@@ -64,19 +64,28 @@ function renderTasks() {
 }
 
 function renderTask(task) {
-    getTaskList().innerHTML += card(task)
+    // find or create big card by day
+    const bigCard = document.getElementById(task.get_date) || createBigCard(task.get_date)
+    // const bigCard = findOrCreateBigCard(task.get_date)
+    // attach task to big card
+    bigCard.innerHTML += card(task)
     const btns = document.querySelectorAll('.completed-button')
     btns.forEach(btn => btn.addEventListener('click', completeTask))
 }
 
+function createBigCard(taskGetDate) {
+    bigCard = document.createElement('div')
+    bigCard.id = taskGetDate
+    bigCard.classList.add('big-card')
+    getTaskList().appendChild(bigCard)
+    return bigCard
+}
+
 function createNewTask(e) {
-
     e.preventDefault()
-
     const categoryName = getCategoryName()
     const taskContent = getTaskContent()
     const taskByWhen = getTaskByWhen()
-
     let strongParams = {
         category: {name: categoryName},
         task: {
@@ -85,22 +94,24 @@ function createNewTask(e) {
         }
     }
 
-    fetch('http://localhost:3000/tasks', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(strongParams)
-    })
-    .then(response => response.json())
+    Api.post('/tasks', strongParams)
     .then(task => {
         tasks.push(task)
         renderTask(task)
+        clearNewTaskForm()
+        toggleNewFormButton()
     })
-    .then(clearNewTaskForm())
-    .then(toggleNewFormButton())
-}
+    }
+    // fetch('http://localhost:3000/tasks', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Accept': 'application/json',
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(strongParams)
+    // })
+    // .then(response => response.json())
+    
 
 const categoryNames = []
 
@@ -134,17 +145,16 @@ function clearNewTaskForm() {
     inputTextAll.forEach( inputText => inputText.value = "")
 }
 
-// complete button 
 
 function completeTask(event) {
-    console.log(event)
     const eventID = event.target.dataset.id
+    console.log('event id')
     console.log(eventID)
-    console.log(event.target.previousElementSibling.innerText.split(' ')[1])
+    // console.log(event.target.previousElementSibling.innerText.split(' ')[1])
     const completedBool = event.target.previousElementSibling.innerText.split(' ')[1]
     // const completed = !completedBool
     // debugger
-      
+    console.log(completedBool)
     let configObj = {
       method: "PATCH",
       headers: {
@@ -152,14 +162,20 @@ function completeTask(event) {
         "Accept": "application/json"
       },
       body: JSON.stringify({
-        "completed": !completedBool
+        "completed": true
       })
       }
       fetch(`http://localhost:3000/tasks/${eventID}`, configObj)
-      .then(response=>response.json())
-      .then(json=>{renderCompleted(json)
-      }
-      )
+      .then(function (response) {
+        if (response.status !== 200) {
+          throw new Error(response.statusText);
+        }
+        return response.json()
+      })
+      .then(function (json) {
+        console.log(json)
+      })
+      .catch(errors => console.log(errors))
   }
   
   function renderCompleted(json) {

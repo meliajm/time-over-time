@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
 
-    render json: @tasks, include: [:category]
+    render json: @tasks, include: [:category], methods: :get_date
   end
 
   # GET /tasks/1
@@ -54,6 +54,6 @@ class TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:by_when, :content)
+      params.require(:task).permit(:by_when, :content, :completed)
     end
 end
