@@ -72,15 +72,11 @@ function renderTasks() {
 function renderTask(task) {
     
     const bigCard = document.getElementById(task.get_date) || createBigCard(task.get_date)
-    // console.log(task.created_at)
-    // console.log(task.get_date)
     if (task.completed) {
         bigCard.innerHTML += cardWithColor(task)
     } else {
         bigCard.innerHTML += card(task)
     }
-
-    // console.log(task)
     const btns = document.querySelectorAll('.completed-button')
     btns.forEach(btn => btn.addEventListener('click', completeTask))
     const deleteButton = document.querySelectorAll('.delete-button')
@@ -89,7 +85,6 @@ function renderTask(task) {
 
 function createBigCard(taskGetDate) {
     bigCard = document.createElement('div')
-    // console.log(task.created_at)
     bigCard.id = taskGetDate
     bigCard.classList.add('big-card')
     getTaskList().appendChild(bigCard)
@@ -173,11 +168,27 @@ function completeTask(event) {
     const allCompletedButtons = document.querySelectorAll('.completed-button')
     for (let i=0; i<allCompletedButtons.length; i++) {
       if (parseInt(allCompletedButtons[i].dataset.id) === json.id) {
-        colorTask(allCompletedButtons[i].parentElement)
+        colorTask(json, allCompletedButtons[i])
       }
     }
   }
 
-  function colorTask(cardContent) {
-      cardContent.classList.add('completed-task')
+  function colorTask(json, button) {
+    if (json.category_id === 1) {
+        button.parentElement.classList.add('completed-task-dodger')
+    } else if (json.category_id === 2) {
+        button.parentElement.classList.add('completed-task-blue')
+    } else if (json.category_id === 3) {
+      button.parentElement.classList.add('completed-task-royal')
+    } else if (json.category_id === 4) {
+      button.parentElement.classList.add('completed-task-sky')
+    } else if (json.category_id === 5) {
+      button.parentElement.classList.add('completed-task-selective')
+    } else if (json.category_id === 6) {
+      button.parentElement.classList.add('completed-task-sandstorm')
+    } else if (json.category_id === 7) {
+      button.parentElement.classList.add('completed-task-minion')
+    } else if (json.category_id === 8) {
+      button.parentElement.classList.add('completed-task-flavescent')
     }
+  }

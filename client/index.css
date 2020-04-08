@@ -34,8 +34,36 @@ button:hover {
   color: #1e90ff;
 }
 
-.completed-task {
+.completed-task-dodger {
   background-color: #1e90ff;
+}
+
+.completed-task-blue {
+  background-color: blue;
+}
+
+.completed-task-royal {
+  background-color: #4169E1;
+}
+
+.completed-task-sky {
+  background-color: #87CEFA;
+}
+
+.completed-task-selective {
+  background-color: #F6BB0A;
+}
+
+.completed-task-sandstorm {
+  background-color: #F9D342;
+}
+
+.completed-task-minion {
+  background-color: #FBE551;
+}
+
+.completed-task-flavescent {
+  background-color: #FDE88D;
 }
 
 .input-text {
