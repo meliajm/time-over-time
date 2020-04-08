@@ -20,12 +20,21 @@ class Api {
         .then(response=>response.json())
     }
 
-    static delete(url, body) {
+    static delete(url) {
         return fetch(this.base_url+url, {
             method: 'DELETE',
+            headers: this.headers
+        })
+    }
+
+    static patch(url, body) {
+        return fetch(this.base_url+url, {
+            method: 'PATCH',
             headers: this.headers,
             body: JSON.stringify(body)
         })
+        .then(response=>response.json())
+
     }
 
     

@@ -1,3 +1,4 @@
+// variables
 let tasks = []
 const categoryNames = []
 
@@ -11,6 +12,8 @@ const getTaskContent = () => document.getElementById('content').value
 const getCategoryName = () => document.getElementById('category').value
 const getTaskByWhen = () => document.getElementById('by_when').value
 
+// event listeners
+
 document.addEventListener('DOMContentLoaded', function() {
     getTasks()
     getFormInfo().addEventListener('submit', createNewTask)
@@ -21,6 +24,8 @@ addTaskButton.addEventListener("click", () => {
     toggleNewFormButton()
 });
 
+
+// functions
 
 function card(task) {
     return `
@@ -51,13 +56,7 @@ function cardWithColor(task) {
 }
 
 function getTasks() {
-    fetch('http://localhost:3000/tasks')
-      .then(function (response) {
-        if (response.status !== 200) {
-          throw new Error(response.statusText);
-        }
-        return response.json()
-      })
+    Api.get('/tasks')
       .then(function (data) {
         tasks = data;
         renderTasks()
@@ -70,28 +69,18 @@ function renderTasks() {
 }
 
 function renderTask(task) {
-    // find or create big card by day
     const bigCard = document.getElementById(task.get_date) || createBigCard(task.get_date)
-    // attach task to big card
     if (task.completed){
         bigCard.innerHTML += cardWithColor(task)
     } else {
         bigCard.innerHTML += card(task)
     }
-    // if (task.completed) {
-    //     colorTask()
-    // }
+
     console.log(task)
-    // renderCompletedOnLoadingDOM(task)
     const btns = document.querySelectorAll('.completed-button')
     btns.forEach(btn => btn.addEventListener('click', completeTask))
     const deleteButton = document.querySelectorAll('.delete-button')
     deleteButton.forEach(button => button.addEventListener('click', deleteTask))
-    // if (task.completed) {
-    //     colorTask(task)
-    // }
-    // cardContent.classList.add('completed-task')
-
 }
 
 function createBigCard(taskGetDate) {
@@ -125,13 +114,7 @@ function createNewTask(e) {
     
 
 function getAllCategories() {
-    fetch('http://localhost:3000/categories')
-      .then(function (response) {
-        if (response.status !== 200) {
-          throw new Error(response.statusText);
-        }
-        return response.json()
-      })
+    Api.get('/categories')
       .then(function (json) {
         json.forEach(cat => categoryNames.push(cat.name))
         return categoryNames
@@ -169,25 +152,12 @@ function deleteTask(event) {
 
 function completeTask(event) {
     const eventID = event.target.dataset.id
-    const completedBool = event.target.previousElementSibling.innerText.split(' ')[1]   
-    // console.log(completedBool)
-    let configObj = {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
+    Api.patch(`/tasks/${eventID}`, {
         "completed": true
-      })
-      }
-      fetch(`http://localhost:3000/tasks/${eventID}`, configObj)
-      .then(function (response) {
-        if (response.status !== 200) {
-          throw new Error(response.statusText);
         }
-        return response.json()
-      })
+      )
+      
+   
       .then(function (json) {
         renderCompleted(json)
       })
@@ -206,44 +176,3 @@ function completeTask(event) {
   function colorTask(cardContent) {
       cardContent.classList.add('completed-task')
     }
-
-/*
-when user clicks on completed button, card or task changes to new color
-triggered by click
-when can be trigger dom loaded
-
-Access to fetch at 'http://localhost:3000/tasks/1' from origin 'null'
- has been blocked by CORS policy: Response to preflight request doesn't
-  pass access control check: No 'Access-Control-Allow-Origin' header is
-   present on the requested resource. If an opaque response serves your
-    needs, set the request's mode to 'no-cors' to fetch the resource with 
-    CORS disabled.
-*/
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     document.querySelectorAll('.card-content').forEach(elem => addEventListener('click', handleClick))
-// })
-
-  
-// function clearTaskColor(cardContent) {
-//     cardContent.classList.remove('completed-task')
-// }
-
-// function handleClick(e) {
-//     mimicServerCall()
-//     .then(response => {
-//       if (e.target.classList !== 'completed-task') {
-//         colorTask(e.target)
-//       } else {
-//         clearTaskColor(e.target)
-//       }  
-//     })
-//     .catch((error) => {
-//       showError()
-//     })
-// }
-
-
-
-
-// delete action -- destroy
