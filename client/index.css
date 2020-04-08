@@ -1,12 +1,13 @@
 .container {
   display: none;
 }
+
 .big-card {
   text-align: center;
   border: blue solid 5px;
-  padding: 2rem;
-  /* width: 15rem;
-  height: 15rem; */
+  /* padding: 2rem; */
+  width: 15rem;
+  /* height: 15rem; */ 
   display: inline-grid;
   margin: 2rem 2rem;
 }
@@ -14,11 +15,11 @@
 .card {
   text-align: center;
   /* border: rgb(0, 0, 0) solid 5px; */
-  padding: 2rem;
-  /* width: 15rem;
-  height: 15rem; */
+  /* padding: 2rem; */
+  width: 15rem;
+  /* height: 15rem; */
   display: inline-grid;
-  margin: 2rem 2rem;
+  /* margin: 2rem 2rem; */
 }
 
 button:hover {
@@ -34,7 +35,7 @@ button:hover {
 }
 
 .completed-task {
-  color: blue;
+  background-color: blue;
 }
 
 .input-text {

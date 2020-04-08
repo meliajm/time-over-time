@@ -1,24 +1,25 @@
-document.addEventListener('DOMContentLoaded', function() {
-    getTasks()
-    getFormInfo().addEventListener('submit', createNewTask)
-    getAllCategories()
-})
-
 let tasks = []
 
 let addTask = false
 const addTaskButton = document.querySelector('#new-task-button')
 const taskForm = document.querySelector('.container')
-addTaskButton.addEventListener("click", () => {
-    toggleNewFormButton()
-});
-
 const getFormInfo = () => document.querySelector('.add-task-form')
 const getTaskList = () => document.querySelector('div.task-list')
 
 const getTaskContent = () => document.getElementById('content').value 
 const getCategoryName = () => document.getElementById('category').value
 const getTaskByWhen = () => document.getElementById('by_when').value
+
+document.addEventListener('DOMContentLoaded', function() {
+    getTasks()
+    getFormInfo().addEventListener('submit', createNewTask)
+    getAllCategories()
+})
+
+addTaskButton.addEventListener("click", () => {
+    toggleNewFormButton()
+});
+
 
 function card(task) {
     return `
@@ -33,15 +34,6 @@ function card(task) {
         </div>
     </div>`   
 }
-
-// function addEventListenerToCompletedButton() {
-//     const completedButton = document.querySelectorAll('.completed-button')
-//     for (let i=0; i<completedButton.length; i++) {
-//         completedButton[i].addEventListener('click', completeTask)
-//         console.log(completedButton[i])
-//     }
-// }
-
 
 
 function getTasks() {
@@ -102,17 +94,7 @@ function createNewTask(e) {
         toggleNewFormButton()
     })
     }
-    // fetch('http://localhost:3000/tasks', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Accept': 'application/json',
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(strongParams)
-    // })
-    // .then(response => response.json())
     
-
 const categoryNames = []
 
 function getAllCategories() {
@@ -150,10 +132,7 @@ function completeTask(event) {
     const eventID = event.target.dataset.id
     console.log('event id')
     console.log(eventID)
-    // console.log(event.target.previousElementSibling.innerText.split(' ')[1])
-    const completedBool = event.target.previousElementSibling.innerText.split(' ')[1]
-    // const completed = !completedBool
-    // debugger
+    const completedBool = event.target.previousElementSibling.innerText.split(' ')[1]   
     console.log(completedBool)
     let configObj = {
       method: "PATCH",
@@ -173,22 +152,23 @@ function completeTask(event) {
         return response.json()
       })
       .then(function (json) {
-        console.log(json)
+        renderCompleted(json)
       })
       .catch(errors => console.log(errors))
   }
   
   function renderCompleted(json) {
-    // const ptags = document.querySelectorAll('p')
-    // const cards = document.querySelectorAll('.card-content')
     const allCompletedButtons = document.querySelectorAll('.completed-button')
     for (let i=0; i<allCompletedButtons.length; i++) {
       if (parseInt(allCompletedButtons[i].dataset.id) === json.id) {
-        colorTask(allCompletedButtons[i])
+        colorTask(allCompletedButtons[i].parentElement)
       }
     }
   }
 
+  function colorTask(cardContent) {
+      cardContent.classList.add('completed-task')
+    }
 
 /*
 when user clicks on completed button, card or task changes to new color
@@ -207,9 +187,6 @@ Access to fetch at 'http://localhost:3000/tasks/1' from origin 'null'
 //     document.querySelectorAll('.card-content').forEach(elem => addEventListener('click', handleClick))
 // })
 
-function colorTask(cardContent) {
-    cardContent.classList.add('completed-task')
-  }
   
 // function clearTaskColor(cardContent) {
 //     cardContent.classList.remove('completed-task')
