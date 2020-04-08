@@ -4,7 +4,7 @@
 
 .big-card {
   text-align: center;
-  border: blue solid 5px;
+  border: #1e90ff solid 5px;
   /* padding: 2rem; */
   width: 15rem;
   /* height: 15rem; */ 
@@ -24,24 +24,33 @@
 
 button:hover {
   background-color: whitesmoke;
-  border: #3409f0 solid 1px;
-  color: #3409f0;
+  border: #1e90ff solid 1px;
+  color: #1e90ff;
 }
 
 .submit:hover {
   background-color: whitesmoke;
-  border: #3409f0 solid 1px;
-  color: #3409f0;
+  border: #1e90ff solid 1px;
+  color: #1e90ff;
 }
 
 .completed-task {
-  background-color: blue;
+  background-color: #1e90ff;
 }
 
 .input-text {
   border-radius: 5px;
   height: 2rem;
   width: 60%;
+  font-size: 18px;
+  /* font-family: monospace; */
+  margin: 3px;
+}
+
+.input-text-date {
+  border-radius: 5px;
+  height: 2rem;
+  width: 20.9%;
   font-size: 18px;
   /* font-family: monospace; */
   margin: 3px;

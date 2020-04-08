@@ -62,10 +62,6 @@ function getTasks() {
         tasks = data;
         renderTasks()
       })
-      .then(function (data) {
-        
-      }
-      )
       .catch(errors => console.log(errors));
 }
 
@@ -89,6 +85,8 @@ function renderTask(task) {
     // renderCompletedOnLoadingDOM(task)
     const btns = document.querySelectorAll('.completed-button')
     btns.forEach(btn => btn.addEventListener('click', completeTask))
+    const deleteButton = document.querySelectorAll('.delete-button')
+    deleteButton.forEach(button => button.addEventListener('click', deleteTask))
     // if (task.completed) {
     //     colorTask(task)
     // }
@@ -116,7 +114,6 @@ function createNewTask(e) {
             by_when: taskByWhen
         }
     }
-
     Api.post('/tasks', strongParams)
     .then(task => {
         tasks.push(task)
@@ -157,11 +154,26 @@ function clearNewTaskForm() {
     inputTextAll.forEach( inputText => inputText.value = "")
 }
 
+function deleteTask(event) {
+    const eventID = event.target.dataset.id 
+    Api.delete(`/tasks/${eventID}`)
+    .then(function (json) {
+    // console.log(json)
+    removeTaskFromDOM(json)
+    })
+}
+
+function removeTaskFromDOM(jsonTask) {
+    const allDeleteButtons = document.querySelectorAll('.delete-button')
+    for (let i=0; i<allDeleteButtons.length; i++) {
+        if (parseInt(allDeleteButtons[i].dataset.id) === jsonTask.id) {
+            allDeleteButtons[i].parentElement.display = none
+        }
+      }
+}
 
 function completeTask(event) {
     const eventID = event.target.dataset.id
-    console.log('event id')
-    console.log(eventID)
     const completedBool = event.target.previousElementSibling.innerText.split(' ')[1]   
     console.log(completedBool)
     let configObj = {
@@ -195,8 +207,6 @@ function completeTask(event) {
       }
     }
   }
-
- 
 
   function colorTask(cardContent) {
       cardContent.classList.add('completed-task')

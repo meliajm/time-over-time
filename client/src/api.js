@@ -20,6 +20,16 @@ class Api {
         .then(response=>response.json())
     }
 
+    static delete(url, body) {
+        return fetch(this.base_url+url, {
+            method: 'DELETE',
+            headers: this.headers,
+            body: JSON.stringify(body)
+        })
+    }
+
+    
+
 
 
 
