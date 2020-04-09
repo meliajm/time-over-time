@@ -62,7 +62,7 @@ function renderTask(task) {
     const bigCard = document.getElementById(task.get_date) || createBigCard(task.get_date)
     // const completedButtonForTask = parseInt(document.querySelector('.completed-button').dataset.id)
     // get button
-    if (task.completed) {
+    
         if (task.category_id === 1) {
             let color = 'dodger'
             bigCard.innerHTML += card(task, color)
@@ -87,14 +87,16 @@ function renderTask(task) {
         } else if (task.category_id == 8) {
             let color = 'flavescent'
             bigCard.innerHTML += card(task, color)
-        }   
-    } else {
-        bigCard.innerHTML += card(task)
-    }
-    const btns = document.querySelectorAll('.completed-button')
-    btns.forEach(btn => btn.addEventListener('click', completeTask))
-    const deleteButtons = document.querySelectorAll('.delete-button')
-    deleteButtons.forEach(button => button.addEventListener('click', deleteTask))
+        }  
+        
+        const btns = document.querySelectorAll('.completed-button')
+        btns.forEach(btn => btn.addEventListener('click', completeTask))
+        const deleteButtons = document.querySelectorAll('.delete-button')
+        deleteButtons.forEach(button => button.addEventListener('click', deleteTask))
+        
+        if (task.completed) {
+            renderCompleted(task)
+        }
 }
 
 // function renderTask(task) {
