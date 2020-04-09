@@ -153,7 +153,7 @@ function toggleNewFormButton() {
     addTask = !addTask;
       if (addTask) {
         taskForm.style.display = "block";
-        document.querySelector('#category').placeholder = categoryNames
+        // document.querySelector('#category').placeholder = categoryNames
       } else {
         taskForm.style.display = "none";
       }

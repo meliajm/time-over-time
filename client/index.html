@@ -12,7 +12,20 @@
             <h2>Create your task!</h2>
             <input type="text" name="content" placeholder="Your task's content" value="" class="input-text" id="content">
             <br>
-            <input type="text" name="category" placeholder="Your task's category" value="" class="input-text" id="category">
+            <!-- <input type="text" name="category" placeholder="Your task's category" value="" class="input-text" id="category"> -->
+            <label for="category">Choose your category:</label>
+
+                <select id="category" class="input-text">
+                <option value=""></option>
+                <option value="Physical Health">Physical Health</option>
+                <option value="Mental Health">Mental Health</option>
+                <option value="Emotional Health">Emotional Health</option>
+                <option value="Chores">Chores</option>
+                <option value="Errands">Errands</option>
+                <option value="Learning!">Learning!</option>
+                <option value="Relaxing">Relaxing</option>
+                <option value="Working">Working</option>
+                </select>
             <br>
             <input type="date" name="by_when" value="" class="input-text date" id="by_when">
             <br>
