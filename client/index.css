@@ -20,7 +20,7 @@ html {
 
 .big-card {
   text-align: center;
-  border: #1e90ff solid 5px;
+  border: rgb(0, 0, 0) solid 5px;
   /* padding: 2rem; */
   width: 11rem;
   /* height: 15rem; */ 
@@ -39,32 +39,54 @@ html {
 }
 
 button {
-  /* font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif; */
+  position: relative;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  height: 2rem;
+  width: max-content;
+  color: black;
+  font-size: 18px;
+  justify-self: center;
   font-family: monospace;
-
-  /* font-size: 7px; */
+  margin: 3px;
 }
 
 .delete-button {
   font-size: 5px;
 }
 
-.submit {
-  /* font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif; */
-  font-family: monospace;
+.completed-button.blue {
+  background-color: blue;
+}
 
+/* .submit {
+  font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif;
+  font-family: monospace;
+} */
+
+.submit {
+  position: relative;
+  background-color: #1e90ff;
+  border-radius: 5px;
+  height: 2rem;
+  width: max-content;
+  color: whitesmoke;
+  font-size: 18px;
+  justify-self: center;
+  font-family: sans-serif;
+  margin: 3px;
 }
 
 button:hover {
   background-color: whitesmoke;
-  border: #1e90ff solid 1px;
-  color: #1e90ff;
+  border: gray solid 1px;
+  color: gray;
 }
 
 .submit:hover {
   background-color: whitesmoke;
-  border: #1e90ff solid 1px;
-  color: #1e90ff;
+  border: gray solid 1px;
+  color: gray;
 }
 
 .completed-task-dodger {

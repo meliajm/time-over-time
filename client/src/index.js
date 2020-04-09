@@ -10,7 +10,8 @@ const getTaskList = () => document.querySelector('div.task-list')
 
 const getTaskContent = () => document.getElementById('content').value 
 const getCategoryName = () => document.getElementById('category').value
-const getTaskByWhen = () => document.getElementById('by_when').value
+// const getTaskByWhen = () => document.getElementById('by_when').value
+
 
 // event listeners
 
@@ -32,7 +33,7 @@ function card(task) {
     <div class="card">
         <div class="card-content">
             <p>${task.content}</p>
-            <p id="hide-complete">By when: ${task.by_when}</p>
+            <p id="hide-complete">By when: </p>
             <p>${task.category.name}</p>
             <h5 id="hide-complete">Completed: ${task.completed} </h5>
             <button class="completed-button" data-id=${task.id}>Completed!</button>
@@ -42,20 +43,20 @@ function card(task) {
     </div>`   
 }
 
-function cardWithColor(task, color) {
-    return `
-    <div class="card">
-        <div class="card-content completed-task-${color}">
-            <p>${task.content}</p>
-            <p id="hide-complete">By when: ${task.by_when}</p>
-            <p>${task.category.name}</p>
-            <h5 id="hide-complete">Completed: ${task.completed} </h5>
-            <button class="completed-button" data-id=${task.id}>Completed!</button>
-            <br>
-            <button class="delete-button" data-id=${task.id}>x</button>
-        </div>
-    </div>`   
-}
+// function cardWithColor(task, color) {
+//     return `
+//     <div class="card">
+//         <div class="card-content completed-task-${color}">
+//             <p>${task.content}</p>
+//             <p id="hide-complete">By when: </p>
+//             <p>${task.category.name}</p>
+//             <h5 id="hide-complete">Completed: ${task.completed} </h5>
+//             <button class="completed-button" data-id=${task.id}>Completed!</button>
+//             <br>
+//             <button class="delete-button" data-id=${task.id}>x</button>
+//         </div>
+//     </div>`   
+// }
 
 // get tasks 
 function getTasks() {
@@ -75,39 +76,54 @@ function renderTask(task) {
     const bigCard = document.getElementById(task.get_date) || createBigCard(task.get_date)
     // const completedButtonForTask = parseInt(document.querySelector('.completed-button').dataset.id)
     // get button
-    if (task.completed) {
-        if (task.category_id === 1) {
-            let color = 'dodger'
-            bigCard.innerHTML += cardWithColor(task, color)
-        } else if (task.category_id == 2) {
-            let color = 'blue'
-            bigCard.innerHTML += cardWithColor(task, color)
-        } else if (task.category_id == 3) {
-            let color = 'royal'
-            bigCard.innerHTML += cardWithColor(task, color)
-        } else if (task.category_id == 4) {
-            let color = 'sky'
-            bigCard.innerHTML += cardWithColor(task, color)
-        } else if (task.category_id == 5) {
-            let color = 'selective'
-            bigCard.innerHTML += cardWithColor(task, color)
-        } else if (task.category_id == 6) {
-            let color = 'sandstorm'
-            bigCard.innerHTML += cardWithColor(task, color)
-        } else if (task.category_id == 7) {
-            let color = 'minion'
-            bigCard.innerHTML += cardWithColor(task, color)
-        } else if (task.category_id == 8) {
-            let color = 'flavescent'
-            bigCard.innerHTML += cardWithColor(task, color)
-        }   
-    } else {
-        bigCard.innerHTML += card(task)
-    }
+
+    bigCard.innerHTML += card(task)
+
     const btns = document.querySelectorAll('.completed-button')
     btns.forEach(btn => btn.addEventListener('click', completeTask))
     const deleteButtons = document.querySelectorAll('.delete-button')
     deleteButtons.forEach(button => button.addEventListener('click', deleteTask))
+    
+    if (task.completed) {
+        for (let i=0;i<btns.length;i++){
+            // console.log(task.category_id)
+            
+            // console.log(parseInt(btns[i].dataset.id))
+            
+            if (task.category_id === parseInt(btns[i].dataset.id)) {
+
+                // let color = ''
+                // let compButton = .querySelector('.completed-button')
+                // btns[i].style.backgroundColor = 'dodger-blue';
+            } else if (task.category_id == 2) {
+                // bigCard.innerHTML += card(task)
+                // let compButton = card(task).querySelector('.completed-button')
+                // compButton.style.backgroundColor = 'blue';
+                // let color = 'blue'
+            } else if (task.category_id == 3) {
+                // let color = 'royal'
+                // bigCard.innerHTML += card(task)
+                // bigCard.innerHTML += card(task)
+                // let compButton = card(task).querySelector('.completed-button')
+                // compButton.style.backgroundColor = 'royal-blue';
+            } else if (task.category_id == 4) {
+                let color = 'sky'
+            } else if (task.category_id == 5) {
+                let color = 'selective'
+            } else if (task.category_id == 6) {
+                let color = 'sandstorm'
+            } else if (task.category_id == 7) {
+                let color = 'minion'
+            } else if (task.category_id == 8) {
+                let color = 'flavescent'
+            }   
+        }
+    } 
+    // else {
+    //     bigCard.innerHTML += card(task)
+    //     console.log(card(task))
+    // }
+    
 }
 
 function createBigCard(taskGetDate) {
@@ -124,12 +140,12 @@ function createNewTask(e) {
     e.preventDefault()
     const categoryName = getCategoryName()
     const taskContent = getTaskContent()
-    const taskByWhen = getTaskByWhen()
+    // const taskByWhen = getTaskByWhen()
     let strongParams = {
         category: {name: categoryName},
         task: {
             content: taskContent,
-            by_when: taskByWhen
+            // by_when: taskByWhen
         }
     }
     Api.post('/tasks', strongParams)
@@ -203,20 +219,28 @@ function completeTask(event) {
 
   function colorTask(json, button) {
     if (json.category_id === 1) {
-        button.parentElement.classList.add('completed-task-dodger')
+        // button.parentElement.classList.add('completed-task-dodger')
+        button.classList.add('completed-task-dodger')
     } else if (json.category_id === 2) {
-        button.parentElement.classList.add('completed-task-blue')
+        // button.parentElement.classList.add('completed-task-blue')
+        button.classList.add('completed-task-blue')
     } else if (json.category_id === 3) {
-      button.parentElement.classList.add('completed-task-royal')
+    //   button.parentElement.classList.add('completed-task-royal')
+      button.classList.add('completed-task-royal')
     } else if (json.category_id === 4) {
-      button.parentElement.classList.add('completed-task-sky')
+    //   button.parentElement.classList.add('completed-task-sky')
+      button.classList.add('completed-task-sky')
     } else if (json.category_id === 5) {
-      button.parentElement.classList.add('completed-task-selective')
+    //   button.parentElement.classList.add('completed-task-selective')
+      button.classList.add('completed-task-selective')
     } else if (json.category_id === 6) {
-      button.parentElement.classList.add('completed-task-sandstorm')
+        //   button.parentElement.classList.add('completed-task-sandstorm')
+      button.classList.add('completed-task-sandstorm')
     } else if (json.category_id === 7) {
-      button.parentElement.classList.add('completed-task-minion')
+    //   button.parentElement.classList.add('completed-task-minion')
+    button.classList.add('completed-task-minion')
     } else if (json.category_id === 8) {
-      button.parentElement.classList.add('completed-task-flavescent')
+    //   button.parentElement.classList.add('completed-task-flavescent')
+      button.classList.add('completed-task-flavescent')
     }
   }
