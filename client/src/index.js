@@ -27,10 +27,10 @@ addTaskButton.addEventListener("click", () => {
 
 // functions
 
-function card(task) {
+function card(task, color) {
     return `
     <div class="card">
-        <div class="card-content">
+        <div class="card-content ${color}">
             <p><strong>${task.content}</strong></p>
             <p id="hide-complete">By when: </p>
             <p>${task.category.name}</p>
@@ -64,58 +64,45 @@ function renderTask(task) {
     // get button
 
     bigCard.innerHTML += card(task)
-
+    console.log(task)
+    console.log(task.category_id)
+    console.log('-------------')
     const btns = document.querySelectorAll('.completed-button')
     btns.forEach(btn => btn.addEventListener('click', completeTask))
     const deleteButtons = document.querySelectorAll('.delete-button')
     deleteButtons.forEach(button => button.addEventListener('click', deleteTask))
+    // {1: 'dodger', 2: 'blue', 11: 'royal', 4: 'sky', 5: 'selective', 6: 'sandstorm', 7: 'minion', 8: 'flavescent'}
+    // btns.forEach( btn => {
+    //     if (task.category_id === 1) {
+    //         btn.parentElement.classList.add('dodger')
+    //     } else if (task.category_id === 2) {
+    //         btn.parentElement.classList.add('blue')
+    //     } else if (task.category_id === 3) {
+    //         btn.parentElement.classList.add('royal')
+    //     } else if (task.category_id === 4) {
+    //         btn.parentElement.classList.add('sky')
+    //     } else if (task.category_id === 5) {
+    //         btn.parentElement.classList.add('selective')
+    //     } else if (task.category_id === 6) {
+    //         btn.parentElement.classList.add('sandstorm')
+    //     } else if (task.category_id === 7) {
+    //         btn.parentElement.classList.add('minion')
+    //     } else if (task.category_id === 8) {
+    //         btn.parentElement.classList.add('flavescent')
+    //     }
+    // })
     
     if (task.completed) {
-        for (let i=0;i<btns.length;i++){
-            if (parseInt(btns[i].dataset.id) === 1) {
-                btns[i].classList.add('completed-task-dodger')
-            } else if (task.category_id === 2) {
-                btns[i].classList.add('completed-task-blue')
-            } else if (parseInt(btns[i].dataset.id) == 3) {
-                btns[i].classList.add('completed-task-royal')
-            } else if (parseInt(btns[i].dataset.id) === 4) {
-                btns[i].classList.add('completed-task-sky')
-            } else if (parseInt(btns[i].dataset.id) === 5) {
-                btns[i].classList.add('completed-task-selective')
-            } else if (parseInt(btns[i].dataset.id) === 6) {
-                btns[i].classList.add('completed-task-sandstorm')
-            } else if (parseInt(btns[i].dataset.id) === 7) {
-                btns[i].classList.add('completed-task-minion')
-            } else if (parseInt(btns[i].dataset.id) === 8) {
-                btns[i].classList.add('completed-task-flavescent')
-            }   
-        }
+        // btns.forEach( btn => {
+        //     colorTask(task, btn)
+        // })
     } else {
-        btns.forEach( btn => {
-            if (task.category_id === 1) {
-                console.log(task.category_id)
-                console.log(btn)
-                btn.parentElement.classList.add('dodger')
-            } else if (task.category_id === 2) {
-                btn.parentElement.classList.add('blue')
-            } else if (parseInt(btn.dataset.id) === 3) {
-                btn.parentElement.classList.add('royal')
-            } else if (parseInt(btn.dataset.id) === 4) {
-                btn.parentElement.classList.add('sky')
-            } else if (parseInt(btn.dataset.id) === 5) {
-                btn.parentElement.classList.add('selective')
-            } else if (parseInt(btn.dataset.id) === 6) {
-                btn.parentElement.classList.add('sandstorm')
-            } else if (parseInt(btn.dataset.id) === 7) {
-                btn.parentElement.classList.add('minion')
-            } else if (parseInt(btn.dataset.id) === 8) {
-                btn.parentElement.classList.add('flavescent')
-            }
-        })
-        
+        console.log('else')
+        console.log(task.category_id)
+        console.log('------')
+
+           
     }
-   
-    
 }
 
 function createBigCard(taskGetDate) {
@@ -200,7 +187,7 @@ function completeTask(event) {
   }
   
   function renderCompleted(json) {
-      console.log(json)
+    //   console.log(json)
     const allCompletedButtons = document.querySelectorAll('.completed-button')
     for (let i=0; i<allCompletedButtons.length; i++) {
       if (parseInt(allCompletedButtons[i].dataset.id) === json.id) {
@@ -210,21 +197,25 @@ function completeTask(event) {
   }
 
   function colorTask(json, button) {
+    console.log('colortask')
+    console.log(json.category_id)
+    console.log('------')
+
     if (json.category_id === 1) {
         button.classList.add('completed-task-dodger')
     } else if (json.category_id === 2) {
         button.classList.add('completed-task-blue')
-    } else if (json.category_id === 3) {
-      button.classList.add('completed-task-royal')
+    } else if (json.category_id === 11) {
+        button.classList.add('completed-task-royal')
     } else if (json.category_id === 4) {
-      button.classList.add('completed-task-sky')
+        button.classList.add('completed-task-sky')
     } else if (json.category_id === 5) {
-      button.classList.add('completed-task-selective')
+        button.classList.add('completed-task-selective')
     } else if (json.category_id === 6) {
-      button.classList.add('completed-task-sandstorm')
+        button.classList.add('completed-task-sandstorm')
     } else if (json.category_id === 7) {
-    button.classList.add('completed-task-minion')
+        button.classList.add('completed-task-minion')
     } else if (json.category_id === 8) {
-      button.classList.add('completed-task-flavescent')
+        button.classList.add('completed-task-flavescent')
     }
   }
