@@ -62,48 +62,87 @@ function renderTask(task) {
     const bigCard = document.getElementById(task.get_date) || createBigCard(task.get_date)
     // const completedButtonForTask = parseInt(document.querySelector('.completed-button').dataset.id)
     // get button
-
-    bigCard.innerHTML += card(task)
-    console.log(task)
-    console.log(task.category_id)
-    console.log('-------------')
+    if (task.completed) {
+        if (task.category_id === 1) {
+            let color = 'dodger'
+            bigCard.innerHTML += card(task, color)
+        } else if (task.category_id == 2) {
+            let color = 'blue'
+            bigCard.innerHTML += card(task, color)
+        } else if (task.category_id == 3) {
+            let color = 'royal'
+            bigCard.innerHTML += card(task, color)
+        } else if (task.category_id == 4) {
+            let color = 'sky'
+            bigCard.innerHTML += card(task, color)
+        } else if (task.category_id == 5) {
+            let color = 'selective'
+            bigCard.innerHTML += card(task, color)
+        } else if (task.category_id == 6) {
+            let color = 'sandstorm'
+            bigCard.innerHTML += card(task, color)
+        } else if (task.category_id == 7) {
+            let color = 'minion'
+            bigCard.innerHTML += card(task, color)
+        } else if (task.category_id == 8) {
+            let color = 'flavescent'
+            bigCard.innerHTML += card(task, color)
+        }   
+    } else {
+        bigCard.innerHTML += card(task)
+    }
     const btns = document.querySelectorAll('.completed-button')
     btns.forEach(btn => btn.addEventListener('click', completeTask))
     const deleteButtons = document.querySelectorAll('.delete-button')
     deleteButtons.forEach(button => button.addEventListener('click', deleteTask))
-    // {1: 'dodger', 2: 'blue', 11: 'royal', 4: 'sky', 5: 'selective', 6: 'sandstorm', 7: 'minion', 8: 'flavescent'}
-    // btns.forEach( btn => {
-    //     if (task.category_id === 1) {
-    //         btn.parentElement.classList.add('dodger')
-    //     } else if (task.category_id === 2) {
-    //         btn.parentElement.classList.add('blue')
-    //     } else if (task.category_id === 3) {
-    //         btn.parentElement.classList.add('royal')
-    //     } else if (task.category_id === 4) {
-    //         btn.parentElement.classList.add('sky')
-    //     } else if (task.category_id === 5) {
-    //         btn.parentElement.classList.add('selective')
-    //     } else if (task.category_id === 6) {
-    //         btn.parentElement.classList.add('sandstorm')
-    //     } else if (task.category_id === 7) {
-    //         btn.parentElement.classList.add('minion')
-    //     } else if (task.category_id === 8) {
-    //         btn.parentElement.classList.add('flavescent')
-    //     }
-    // })
+}
+
+// function renderTask(task) {
+//     const bigCard = document.getElementById(task.get_date) || createBigCard(task.get_date)
+//     // const completedButtonForTask = parseInt(document.querySelector('.completed-button').dataset.id)
+//     // get button
+
+//     bigCard.innerHTML += card(task)
+//     console.log(task)
+//     console.log(task.category_id)
+//     console.log('-------------')
+//     const btns = document.querySelectorAll('.completed-button')
+//     btns.forEach(btn => btn.addEventListener('click', completeTask))
+//     const deleteButtons = document.querySelectorAll('.delete-button')
+//     deleteButtons.forEach(button => button.addEventListener('click', deleteTask))
+//     // {1: 'dodger', 2: 'blue', 11: 'royal', 4: 'sky', 5: 'selective', 6: 'sandstorm', 7: 'minion', 8: 'flavescent'}
+//     // btns.forEach( btn => {
+//     //     if (task.category_id === 1) {
+//     //         btn.parentElement.classList.add('dodger')
+//     //     } else if (task.category_id === 2) {
+//     //         btn.parentElement.classList.add('blue')
+//     //     } else if (task.category_id === 3) {
+//     //         btn.parentElement.classList.add('royal')
+//     //     } else if (task.category_id === 4) {
+//     //         btn.parentElement.classList.add('sky')
+//     //     } else if (task.category_id === 5) {
+//     //         btn.parentElement.classList.add('selective')
+//     //     } else if (task.category_id === 6) {
+//     //         btn.parentElement.classList.add('sandstorm')
+//     //     } else if (task.category_id === 7) {
+//     //         btn.parentElement.classList.add('minion')
+//     //     } else if (task.category_id === 8) {
+//     //         btn.parentElement.classList.add('flavescent')
+//     //     }
+//     // })
     
-    if (task.completed) {
-        // btns.forEach( btn => {
-        //     colorTask(task, btn)
-        // })
-    } else {
-        console.log('else')
-        console.log(task.category_id)
-        console.log('------')
+//     if (task.completed) {
+//         // btns.forEach( btn => {
+//         //     colorTask(task, btn)
+//         // })
+//     } else {
+//         console.log('else')
+//         console.log(task.category_id)
+//         console.log('------')
 
            
-    }
-}
+//     }
+// }
 
 function createBigCard(taskGetDate) {
     bigCard = document.createElement('div')
