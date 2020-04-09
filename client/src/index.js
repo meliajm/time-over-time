@@ -31,7 +31,7 @@ function card(task, color) {
     return `
     <div class="card">
         <div class="card-content ${color}">
-            <p><strong>${task.content}</strong></p>
+            <p><strong>${Formatter.titleize(task.content)}</strong></p>
             <p id="hide-complete">By when: </p>
             <p>${task.category.name}</p>
             <h5 id="hide-complete">Completed: ${task.completed} </h5>
@@ -164,7 +164,7 @@ function createNewTask(e) {
     let strongParams = {
         category: {name: categoryName},
         task: {
-            content: taskContent,
+            content: Formatter.titleize(taskContent),
             // by_when: taskByWhen
         }
     }
