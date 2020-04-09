@@ -33,7 +33,7 @@ html {
   border: rgb(0, 0, 0) solid 2px;
   /* padding: 2rem; */
   width: 11rem;
-  /* height: 15rem; */
+  height: 8rem;
   display: inline-grid;
   /* margin: 2rem 2rem; */
 }
@@ -46,7 +46,7 @@ button {
 }
 
 .delete-button {
-  font-size: 7px;
+  font-size: 5px;
 }
 
 .submit {
@@ -123,4 +123,8 @@ button:hover {
 
 #hide-delete {
   display: none
+}
+
+.grey_color {
+  color: #ccc;
 }
