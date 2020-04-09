@@ -9,12 +9,12 @@
   width: 15rem;
   /* height: 15rem; */ 
   display: inline-grid;
-  margin: 2rem 2rem;
+  /* margin: 2rem 2rem; */
 }
 
 .card {
   text-align: center;
-  /* border: rgb(0, 0, 0) solid 5px; */
+  border: rgb(0, 0, 0) solid 2px;
   /* padding: 2rem; */
   width: 15rem;
   /* height: 15rem; */
