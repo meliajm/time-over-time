@@ -75,7 +75,7 @@ button:hover {
   margin: 3px;
 }
 
-.input-text-date {
+.input-text.date {
   border-radius: 5px;
   height: 2rem;
   width: 20.9%;

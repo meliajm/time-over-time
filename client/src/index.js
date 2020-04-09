@@ -98,9 +98,7 @@ function renderTask(task) {
         } else if (task.category_id == 8) {
             let color = 'flavescent'
             bigCard.innerHTML += cardWithColor(task, color)
-        }
-        
-        
+        }   
     } else {
         bigCard.innerHTML += card(task)
     }
