@@ -41,10 +41,10 @@ function card(task) {
     </div>`   
 }
 
-function cardWithColor(task) {
+function cardWithColor(task, color) {
     return `
     <div class="card">
-        <div class="card-content completed-task">
+        <div class="card-content completed-task-${color}">
             <p>Content: ${task.content}</p>
             <p>By when: ${task.by_when}</p>
             <p>Category: ${task.category.name}</p>
@@ -70,17 +70,44 @@ function renderTasks() {
 }
 
 function renderTask(task) {
-    
     const bigCard = document.getElementById(task.get_date) || createBigCard(task.get_date)
+    // const completedButtonForTask = parseInt(document.querySelector('.completed-button').dataset.id)
+    // get button
     if (task.completed) {
-        bigCard.innerHTML += cardWithColor(task)
+        if (task.category_id === 1) {
+            let color = 'dodger'
+            bigCard.innerHTML += cardWithColor(task, color)
+        } else if (task.category_id == 2) {
+            let color = 'blue'
+            bigCard.innerHTML += cardWithColor(task, color)
+        } else if (task.category_id == 3) {
+            let color = 'royal'
+            bigCard.innerHTML += cardWithColor(task, color)
+        } else if (task.category_id == 4) {
+            let color = 'sky'
+            bigCard.innerHTML += cardWithColor(task, color)
+        } else if (task.category_id == 5) {
+            let color = 'selective'
+            bigCard.innerHTML += cardWithColor(task, color)
+        } else if (task.category_id == 6) {
+            let color = 'sandstorm'
+            bigCard.innerHTML += cardWithColor(task, color)
+        } else if (task.category_id == 7) {
+            let color = 'minion'
+            bigCard.innerHTML += cardWithColor(task, color)
+        } else if (task.category_id == 8) {
+            let color = 'flavescent'
+            bigCard.innerHTML += cardWithColor(task, color)
+        }
+        
+        
     } else {
         bigCard.innerHTML += card(task)
     }
     const btns = document.querySelectorAll('.completed-button')
     btns.forEach(btn => btn.addEventListener('click', completeTask))
-    const deleteButton = document.querySelectorAll('.delete-button')
-    deleteButton.forEach(button => button.addEventListener('click', deleteTask))
+    const deleteButtons = document.querySelectorAll('.delete-button')
+    deleteButtons.forEach(button => button.addEventListener('click', deleteTask))
 }
 
 function createBigCard(taskGetDate) {
@@ -165,6 +192,7 @@ function completeTask(event) {
   }
   
   function renderCompleted(json) {
+      console.log(json)
     const allCompletedButtons = document.querySelectorAll('.completed-button')
     for (let i=0; i<allCompletedButtons.length; i++) {
       if (parseInt(allCompletedButtons[i].dataset.id) === json.id) {
