@@ -31,12 +31,13 @@ function card(task) {
     return `
     <div class="card">
         <div class="card-content">
-            <p>Content: ${task.content}</p>
-            <p>By when: ${task.by_when}</p>
-            <p>Category: ${task.category.name}</p>
+            <p>${task.content}</p>
+            <p id="hide-complete">By when: ${task.by_when}</p>
+            <p>${task.category.name}</p>
             <h5 id="hide-complete">Completed: ${task.completed} </h5>
             <button class="completed-button" data-id=${task.id}>Completed!</button>
-            <button class="delete-button" data-id=${task.id}>Delete</button>
+            <br>
+            <button class="delete-button" data-id=${task.id}>x</button>
         </div>
     </div>`   
 }
@@ -45,12 +46,13 @@ function cardWithColor(task, color) {
     return `
     <div class="card">
         <div class="card-content completed-task-${color}">
-            <p>Content: ${task.content}</p>
-            <p>By when: ${task.by_when}</p>
-            <p>Category: ${task.category.name}</p>
+            <p>${task.content}</p>
+            <p id="hide-complete">By when: ${task.by_when}</p>
+            <p>${task.category.name}</p>
             <h5 id="hide-complete">Completed: ${task.completed} </h5>
             <button class="completed-button" data-id=${task.id}>Completed!</button>
-            <button class="delete-button" data-id=${task.id}>Delete</button>
+            <br>
+            <button class="delete-button" data-id=${task.id}>x</button>
         </div>
     </div>`   
 }

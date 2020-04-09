@@ -1,3 +1,10 @@
+html {
+  height: 100%;
+  width: 100%;
+  font-family: monospace;
+  /* font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif; */
+}
+
 .container {
   display: none;
 }
@@ -29,6 +36,23 @@
   /* height: 15rem; */
   display: inline-grid;
   /* margin: 2rem 2rem; */
+}
+
+button {
+  /* font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif; */
+  font-family: monospace;
+
+  /* font-size: 7px; */
+}
+
+.delete-button {
+  font-size: 7px;
+}
+
+.submit {
+  /* font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif; */
+  font-family: monospace;
+
 }
 
 button:hover {
@@ -80,7 +104,7 @@ button:hover {
   height: 2rem;
   width: 60%;
   font-size: 18px;
-  /* font-family: monospace; */
+  font-family: monospace;
   margin: 3px;
 }
 

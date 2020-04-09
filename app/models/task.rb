@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
     belongs_to :category
-    validates_presence_of :by_when, :content
+    validates_presence_of :content#, :by_when
 
     def get_date
         created_at.strftime('%m/%d/%Y')
