@@ -18,25 +18,55 @@ html {
   padding: 1px;
 }
 
+
+.flex-container {
+  width: 100%;
+  height: 250px;
+  background-color: rgba(0, 0, 150, .3);
+  text-align: center;
+}
+.flex-item {
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  background-color: rgba(0, 150, 0, .3);
+  display: inline-block;
+  width: 150px;
+  height: 250px;
+}
+
+/* .flex-item + .flex-item {
+  margin-left: 2%;
+} */
+
 .big-card {
   text-align: center;
   border: rgb(0, 0, 0) solid 5px;
-  /* padding: 2rem; */
-  width: 11rem;
+  padding: 2rem;
+  width: 13rem;
+  /* display: flex; */
+  /* align-items: center */
   /* height: 15rem; */ 
-  display: inline-grid;
+  /* display: inline-grid; */
   /* margin: 2rem 2rem; */
 }
 
 .card {
-  text-align: center;
-  border: rgb(0, 0, 0) solid 2px;
-  /* padding: 2rem; */
+  /* text-align: center; */
+  box-sizing: border-box;
+  /* border: gray solid 1px; */
+  /* padding: 1rem; */
   width: 11rem;
-  height: 8rem;
-  display: inline-grid;
+  height: auto;
+  display: inline-block;
+  justify-self: center;
+  /* display: inline-grid; */
+  /* justify-content: center */
+  /* display: flex; */
+  /* align-items: center */
   /* margin: 2rem 2rem; */
 }
+
+
 
 button {
   position: relative;
@@ -45,24 +75,37 @@ button {
   height: 2rem;
   width: max-content;
   color: black;
-  font-size: 18px;
+  font-size: 10px;
   justify-self: center;
   font-family: monospace;
   margin: 3px;
 }
 
-.delete-button {
+/* .delete-button {
   font-size: 5px;
-}
+} */
 
-.completed-button.blue {
+/* .completed-button.blue {
   background-color: blue;
-}
+} */
 
 /* .submit {
   font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif;
   font-family: monospace;
 } */
+
+#new-task-button {
+  position: relative;
+  background-color: #1e90ff;
+  border-radius: 5px;
+  height: 2rem;
+  width: max-content;
+  color: whitesmoke;
+  font-size: 18px;
+  justify-self: center;
+  font-family: monospace;
+  margin: 3px;
+}
 
 .submit {
   position: relative;
@@ -78,13 +121,13 @@ button {
 }
 
 button:hover {
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
   border: gray solid 1px;
   color: gray;
 }
 
 .submit:hover {
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
   border: gray solid 1px;
   color: gray;
 }
@@ -119,6 +162,47 @@ button:hover {
 
 .completed-task-flavescent {
   background-color: #FDE88D;
+}
+
+.card-content.dodger {
+  border: #1e90ff solid 1px;
+  /* background-color: #1e90ff; */
+}
+
+.card-content.blue {
+  border: blue solid 1px;
+  /* background-color: blue; */
+}
+
+.card-content.royal {
+  border: #4169E1 solid 1px;
+
+  /* background-color: #4169E1; */
+}
+
+.card-content.sky {
+  border: #87CEFA solid 1px;
+  /* background-color: #87CEFA; */
+}
+
+.card-content.selective {
+  border: #F6BB0A solid 1px;
+  /* background-color: #F6BB0A; */
+}
+
+.card-content.sandstorm {
+  border: #F9D342 solid 1px;
+  /* background-color: #F9D342; */
+}
+
+.card-content.minion {
+  border: #FBE551 solid 1px;
+  /* background-color: #FBE551; */
+}
+
+.card-content.flavescent {
+  border: #FDE88D solid 1px;
+  /* background-color: #FDE88D; */
 }
 
 .input-text {

@@ -25,38 +25,24 @@ addTaskButton.addEventListener("click", () => {
     toggleNewFormButton()
 });
 
-
 // functions
 
 function card(task) {
     return `
     <div class="card">
         <div class="card-content">
-            <p>${task.content}</p>
+            <p><strong>${task.content}</strong></p>
             <p id="hide-complete">By when: </p>
             <p>${task.category.name}</p>
             <h5 id="hide-complete">Completed: ${task.completed} </h5>
             <button class="completed-button" data-id=${task.id}>Completed!</button>
-            <br>
+            
             <button class="delete-button" data-id=${task.id}>x</button>
         </div>
-    </div>`   
+    </div>
+    <br>
+    <br>`   
 }
-
-// function cardWithColor(task, color) {
-//     return `
-//     <div class="card">
-//         <div class="card-content completed-task-${color}">
-//             <p>${task.content}</p>
-//             <p id="hide-complete">By when: </p>
-//             <p>${task.category.name}</p>
-//             <h5 id="hide-complete">Completed: ${task.completed} </h5>
-//             <button class="completed-button" data-id=${task.id}>Completed!</button>
-//             <br>
-//             <button class="delete-button" data-id=${task.id}>x</button>
-//         </div>
-//     </div>`   
-// }
 
 // get tasks 
 function getTasks() {
@@ -86,45 +72,49 @@ function renderTask(task) {
     
     if (task.completed) {
         for (let i=0;i<btns.length;i++){
-            // console.log(task.category_id)
-            
-            // console.log(parseInt(btns[i].dataset.id))
-            
             if (parseInt(btns[i].dataset.id) === 1) {
                 btns[i].classList.add('completed-task-dodger')
-            } else if (task.category_id == 2) {
-                // bigCard.innerHTML += card(task)
-                // let compButton = card(task).querySelector('.completed-button')
-                // compButton.style.backgroundColor = 'blue';
-                // let color = 'blue'
+            } else if (task.category_id === 2) {
                 btns[i].classList.add('completed-task-blue')
             } else if (parseInt(btns[i].dataset.id) == 3) {
-                // let color = 'royal'
-                // bigCard.innerHTML += card(task)
-                // bigCard.innerHTML += card(task)
-                // let compButton = card(task).querySelector('.completed-button')
-                // compButton.style.backgroundColor = 'royal-blue';
                 btns[i].classList.add('completed-task-royal')
-            } else if (parseInt(btns[i].dataset.id) == 4) {
+            } else if (parseInt(btns[i].dataset.id) === 4) {
                 btns[i].classList.add('completed-task-sky')
-            } else if (parseInt(btns[i].dataset.id) == 5) {
+            } else if (parseInt(btns[i].dataset.id) === 5) {
                 btns[i].classList.add('completed-task-selective')
-            } else if (parseInt(btns[i].dataset.id) == 6) {
+            } else if (parseInt(btns[i].dataset.id) === 6) {
                 btns[i].classList.add('completed-task-sandstorm')
-
-            } else if (parseInt(btns[i].dataset.id) == 7) {
+            } else if (parseInt(btns[i].dataset.id) === 7) {
                 btns[i].classList.add('completed-task-minion')
-
-            } else if (parseInt(btns[i].dataset.id) == 8) {
+            } else if (parseInt(btns[i].dataset.id) === 8) {
                 btns[i].classList.add('completed-task-flavescent')
-
             }   
         }
-    } 
-    // else {
-    //     bigCard.innerHTML += card(task)
-    //     console.log(card(task))
-    // }
+    } else {
+        btns.forEach( btn => {
+            if (task.category_id === 1) {
+                console.log(task.category_id)
+                console.log(btn)
+                btn.parentElement.classList.add('dodger')
+            } else if (task.category_id === 2) {
+                btn.parentElement.classList.add('blue')
+            } else if (parseInt(btn.dataset.id) === 3) {
+                btn.parentElement.classList.add('royal')
+            } else if (parseInt(btn.dataset.id) === 4) {
+                btn.parentElement.classList.add('sky')
+            } else if (parseInt(btn.dataset.id) === 5) {
+                btn.parentElement.classList.add('selective')
+            } else if (parseInt(btn.dataset.id) === 6) {
+                btn.parentElement.classList.add('sandstorm')
+            } else if (parseInt(btn.dataset.id) === 7) {
+                btn.parentElement.classList.add('minion')
+            } else if (parseInt(btn.dataset.id) === 8) {
+                btn.parentElement.classList.add('flavescent')
+            }
+        })
+        
+    }
+   
     
 }
 
