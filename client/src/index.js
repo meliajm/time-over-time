@@ -90,32 +90,34 @@ function renderTask(task) {
             
             // console.log(parseInt(btns[i].dataset.id))
             
-            if (task.category_id === parseInt(btns[i].dataset.id)) {
-
-                // let color = ''
-                // let compButton = .querySelector('.completed-button')
-                // btns[i].style.backgroundColor = 'dodger-blue';
+            if (parseInt(btns[i].dataset.id) === 1) {
+                btns[i].classList.add('completed-task-dodger')
             } else if (task.category_id == 2) {
                 // bigCard.innerHTML += card(task)
                 // let compButton = card(task).querySelector('.completed-button')
                 // compButton.style.backgroundColor = 'blue';
                 // let color = 'blue'
-            } else if (task.category_id == 3) {
+                btns[i].classList.add('completed-task-blue')
+            } else if (parseInt(btns[i].dataset.id) == 3) {
                 // let color = 'royal'
                 // bigCard.innerHTML += card(task)
                 // bigCard.innerHTML += card(task)
                 // let compButton = card(task).querySelector('.completed-button')
                 // compButton.style.backgroundColor = 'royal-blue';
-            } else if (task.category_id == 4) {
-                let color = 'sky'
-            } else if (task.category_id == 5) {
-                let color = 'selective'
-            } else if (task.category_id == 6) {
-                let color = 'sandstorm'
-            } else if (task.category_id == 7) {
-                let color = 'minion'
-            } else if (task.category_id == 8) {
-                let color = 'flavescent'
+                btns[i].classList.add('completed-task-royal')
+            } else if (parseInt(btns[i].dataset.id) == 4) {
+                btns[i].classList.add('completed-task-sky')
+            } else if (parseInt(btns[i].dataset.id) == 5) {
+                btns[i].classList.add('completed-task-selective')
+            } else if (parseInt(btns[i].dataset.id) == 6) {
+                btns[i].classList.add('completed-task-sandstorm')
+
+            } else if (parseInt(btns[i].dataset.id) == 7) {
+                btns[i].classList.add('completed-task-minion')
+
+            } else if (parseInt(btns[i].dataset.id) == 8) {
+                btns[i].classList.add('completed-task-flavescent')
+
             }   
         }
     } 
@@ -219,28 +221,20 @@ function completeTask(event) {
 
   function colorTask(json, button) {
     if (json.category_id === 1) {
-        // button.parentElement.classList.add('completed-task-dodger')
         button.classList.add('completed-task-dodger')
     } else if (json.category_id === 2) {
-        // button.parentElement.classList.add('completed-task-blue')
         button.classList.add('completed-task-blue')
     } else if (json.category_id === 3) {
-    //   button.parentElement.classList.add('completed-task-royal')
       button.classList.add('completed-task-royal')
     } else if (json.category_id === 4) {
-    //   button.parentElement.classList.add('completed-task-sky')
       button.classList.add('completed-task-sky')
     } else if (json.category_id === 5) {
-    //   button.parentElement.classList.add('completed-task-selective')
       button.classList.add('completed-task-selective')
     } else if (json.category_id === 6) {
-        //   button.parentElement.classList.add('completed-task-sandstorm')
       button.classList.add('completed-task-sandstorm')
     } else if (json.category_id === 7) {
-    //   button.parentElement.classList.add('completed-task-minion')
     button.classList.add('completed-task-minion')
     } else if (json.category_id === 8) {
-    //   button.parentElement.classList.add('completed-task-flavescent')
       button.classList.add('completed-task-flavescent')
     }
   }
