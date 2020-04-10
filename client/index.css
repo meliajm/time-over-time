@@ -6,11 +6,17 @@
 }
 
 .circle {
-  stroke: #4169E1;
+  stroke: rgb(119, 202, 24);
   fill: none;
   stroke-width: 2.8;
   stroke-linecap: round;
-  /* animation: progress 1s ease-out forwards; */
+  animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
 }
 
 html {

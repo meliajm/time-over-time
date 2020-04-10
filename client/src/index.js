@@ -65,18 +65,10 @@ function getTasks() {
         renderTasks()
       })
       .then(function () {
-        // addTaskButtonDiv = document.createElement('p')
-        // addTaskButton.appendChild(addTaskButtonDiv)
-        // addTaskButtonDiv.innerHTML = ( completedTasksArray.length / totalTasks * 100)
-        // addTaskButtonDiv.innerHTML = ( completedTasksArray.length / totalTasks * 100)
-        // console.log('perc')
-        // console.log(completedTasksArray.length / totalTasks * 100)
         renderCirlce(completedTasksArray.length / totalTasks * 100)
-
       })
       .catch(errors => console.log(errors))
 }
-
 
 function renderCirlce(percentCompleted) {
     const ptag = document.getElementById('top-doc')
@@ -95,8 +87,6 @@ function circle(percentCompleted) {
     </svg>
     `   
 }
-
-
 
 function renderTasks() {
     tasks.forEach(task => renderTask(task))
