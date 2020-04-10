@@ -7,7 +7,7 @@ let completedTasksArray = []
 let addTask = false
 const addTaskButton = document.querySelector('#new-task-button')
 const taskForm = document.querySelector('.container')
-const getFormInfo = () => document.querySelector('.add-task-form')
+const getFormInfo = document.querySelector('.add-task-form')
 const getTaskList = document.querySelector('div.task-list')
 
 const getTaskContent = () => document.getElementById('content').value 
@@ -19,7 +19,7 @@ const getCategoryName = () => document.getElementById('category').value
 
 document.addEventListener('DOMContentLoaded', function() {
     getTasks()
-    getFormInfo().addEventListener('submit', createNewTask)
+    getFormInfo.addEventListener('submit', createNewTask)
     getAllCategories()
 })
 
@@ -103,22 +103,22 @@ function renderTask(task) {
         } else if (task.category_id == 2) {
             let color = 'blue'
             bigCard.insertAdjacentHTML('afterbegin', card(task, color));
-        } else if (task.category_id == 3) {
+        } else if (task.category_id == 11) {
             let color = 'royal'
             bigCard.insertAdjacentHTML('afterbegin', card(task, color));
-        } else if (task.category_id == 4) {
+        } else if (task.category_id == 14) {
             let color = 'sky'
             bigCard.insertAdjacentHTML('afterbegin', card(task, color));
-        } else if (task.category_id == 5) {
+        } else if (task.category_id == 15) {
             let color = 'selective'
             bigCard.insertAdjacentHTML('afterbegin', card(task, color));
-        } else if (task.category_id == 6) {
+        } else if (task.category_id == 16) {
             let color = 'sandstorm'
             bigCard.insertAdjacentHTML('afterbegin', card(task, color));
-        } else if (task.category_id == 7) {
+        } else if (task.category_id == 17) {
             let color = 'minion'
             bigCard.insertAdjacentHTML('afterbegin', card(task, color));
-        } else if (task.category_id == 8) {
+        } else if (task.category_id == 18) {
             let color = 'flavescent'
             bigCard.insertAdjacentHTML('afterbegin', card(task, color));
         }  
@@ -175,10 +175,52 @@ function createNewTask(e) {
 function getAllCategories() {
     Api.get('/categories')
       .then(function (json) {
-        json.forEach(cat => categoryNames.push(cat.name))
-        return categoryNames
+        json.forEach(cat => categoryNames.push(cat))
+        return unique(categoryNames)
+      })
+      .then(function(categories) {
+          makeDropDownListOfCategories(categories)
       })
       .catch(errors => console.log(errors));
+}
+
+function makeDropDownListOfCategories(cats) {
+    // const inputTextNewTaskForm = document.querySelector('.input-text')
+    // const label = document.createElement('label')
+    // label.classList.add('categories-for-drop-down')
+
+    // <!-- <select id="category" class="input-text">
+    // <option disabled="disabled" selected="selected">Choose your category</option> 
+
+    const selectElem = document.createElement('select')
+    selectElem.classList.add('input-text')
+    selectElem.id = 'category'
+    // inputTextNewTaskForm.insertAdjacentElement('beforeend', selectElem)
+    getFormInfo.appendChild(selectElem)
+
+    const option = document.createElement('option')
+    option.disabled = true
+    option.selected = 'selected' 
+    option.innerHTML = 'Choose your category'
+
+    cats.forEach( cat => {
+        // console.log(cat)
+        const optionElem = document.createElement('option')
+        optionElem.value = cat.name
+        optionElem.innerHTML = cat.name
+        selectElem.appendChild(optionElem)
+    })
+    // getFormInfo.appendChild(inputTextNewTaskForm)
+}
+
+function unique(array) {
+    let arrA = []
+    for (let i=0; i<array.length; i++) {
+      if (!arrA.includes(array[i])) {
+        arrA.push(array[i])
+      } 
+    }
+    return arrA
 }
 
 function toggleNewFormButton() {
