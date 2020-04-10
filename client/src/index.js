@@ -8,7 +8,7 @@ let addTask = false
 const addTaskButton = document.querySelector('#new-task-button')
 const taskForm = document.querySelector('.container')
 const getFormInfo = () => document.querySelector('.add-task-form')
-const getTaskList = () => document.querySelector('div.task-list')
+const getTaskList = document.querySelector('div.task-list')
 
 const getTaskContent = () => document.getElementById('content').value 
 const getCategoryName = () => document.getElementById('category').value
@@ -168,7 +168,13 @@ function createBigCard(taskGetDate) {
     bigCard = document.createElement('div')
     bigCard.id = taskGetDate
     bigCard.classList.add('big-card')
-    getTaskList().appendChild(bigCard)
+    // getTaskList.appendChild(bigCard)
+    getTaskList.insertBefore(bigCard, getTaskList.firstChild);
+
+    // getTaskList.insertBefore(bigCard)
+    // parentNode.insertBefore(newNode, referenceNode)
+    // getTaskList.insertAdjacentElement('afterbegin', bigCard)
+    // beforebegin
     return bigCard
 }
 

@@ -27,7 +27,8 @@ html {
 
 .task-list {
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto;
+  grid-template-columns: auto auto;
+  /* auto auto auto auto auto */
   grid-gap: 1px;
   /* background-color: #0180ff; */
   /* background-color: #df99f5; */
@@ -35,7 +36,7 @@ html {
 }
 
 
-.flex-container {
+/* .flex-container {
   width: 100%;
   height: 250px;
   background-color: rgba(0, 0, 150, .3);
@@ -48,7 +49,7 @@ html {
   display: inline-block;
   width: 150px;
   height: 250px;
-}
+} */
 
 /* .flex-item + .flex-item {
   margin-left: 2%;
@@ -58,7 +59,7 @@ html {
   text-align: center;
   border: rgb(0, 0, 0) solid 5px;
   padding: 2rem;
-  width: 13rem;
+  width: 11rem;
   /* display: flex; */
   /* align-items: center */
   /* height: 15rem; */ 
@@ -118,7 +119,7 @@ button {
   width: max-content;
   color: whitesmoke;
   font-size: 14px;
-  justify-self: center;
+  /* justify-self: center; */
   font-family: monospace;
   margin: 3px;
 }
