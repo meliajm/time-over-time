@@ -1,6 +1,8 @@
 // variables
 let tasks = []
 const categoryNames = []
+let totalTasks = 0
+let completedTasksArray = []
 
 let addTask = false
 const addTaskButton = document.querySelector('#new-task-button')
@@ -48,10 +50,26 @@ function card(task, color) {
 function getTasks() {
     Api.get('/tasks')
       .then(function (data) {
-        tasks = data;
+        totalTasks = data.length
+        console.log(totalTasks)
+        data.forEach( task => {
+            if (task.completed === true) {
+              completedTasksArray.push(task)
+            }
+        })
+        //   console.log(data)
+        // tasks = data.sort(function(taskA, taskB) {
+        //     return taskB.id - taskA.id
+        // })
+        tasks = data
         renderTasks()
       })
-      .catch(errors => console.log(errors));
+      .then(function () {
+        addTaskButtonDiv = document.createElement('p')
+        addTaskButton.appendChild(addTaskButtonDiv)
+        addTaskButtonDiv.innerHTML = ( completedTasksArray.length / totalTasks * 100)
+      })
+      .catch(errors => console.log(errors))
 }
 
 function renderTasks() {
@@ -260,3 +278,5 @@ function completeTask(event) {
         button.classList.add('completed-task-flavescent')
     }
   }
+
+

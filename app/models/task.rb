@@ -7,4 +7,8 @@ class Task < ApplicationRecord
         # t.strftime("Printed on %m/%d/%Y") 
     end
 
+    def self.order_task_by_newest
+        order(id: :desc)
+    end
+
 end
