@@ -83,28 +83,28 @@ function renderTask(task) {
     
         if (task.category_id === 1) {
             let color = 'dodger'
-            bigCard.innerHTML += card(task, color)
+            bigCard.insertAdjacentHTML('afterbegin', card(task, color));
         } else if (task.category_id == 2) {
             let color = 'blue'
-            bigCard.innerHTML += card(task, color)
+            bigCard.insertAdjacentHTML('afterbegin', card(task, color));
         } else if (task.category_id == 3) {
             let color = 'royal'
-            bigCard.innerHTML += card(task, color)
+            bigCard.insertAdjacentHTML('afterbegin', card(task, color));
         } else if (task.category_id == 4) {
             let color = 'sky'
-            bigCard.innerHTML += card(task, color)
+            bigCard.insertAdjacentHTML('afterbegin', card(task, color));
         } else if (task.category_id == 5) {
             let color = 'selective'
-            bigCard.innerHTML += card(task, color)
+            bigCard.insertAdjacentHTML('afterbegin', card(task, color));
         } else if (task.category_id == 6) {
             let color = 'sandstorm'
-            bigCard.innerHTML += card(task, color)
+            bigCard.insertAdjacentHTML('afterbegin', card(task, color));
         } else if (task.category_id == 7) {
             let color = 'minion'
-            bigCard.innerHTML += card(task, color)
+            bigCard.insertAdjacentHTML('afterbegin', card(task, color));
         } else if (task.category_id == 8) {
             let color = 'flavescent'
-            bigCard.innerHTML += card(task, color)
+            bigCard.insertAdjacentHTML('afterbegin', card(task, color));
         }  
         
         const btns = document.querySelectorAll('.completed-button')
