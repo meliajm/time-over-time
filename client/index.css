@@ -64,7 +64,7 @@ html {
   text-align: center;
   border: rgb(0, 0, 0) solid 5px;
   padding: 2rem;
-  width: 11rem;
+  width: 10rem;
   /* display: flex; */
   /* align-items: center */
   /* height: 15rem; */ 
@@ -77,7 +77,7 @@ html {
   box-sizing: border-box;
   /* border: gray solid 1px; */
   /* padding: 1rem; */
-  width: 11rem;
+  width: 10rem;
   height: auto;
   display: inline-block;
   justify-self: center;

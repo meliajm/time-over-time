@@ -99,11 +99,32 @@ class Task {
     .then(data => {
         let task = new Task(data)
         task.render()
-        updateRenderedCircle((completedTasksArray.length + 1)/ (totalTasks + 1) * 100)
+        // console.log('here')
+        // console.log((completedTasksArray.length))
+        // console.log((totalTasks + 1))
+        // updateRenderedCircle((completedTasksArray.length)/ (totalTasks) * 100)
+        // console.log((completedTasksArray.length)/ (totalTasks + 1) * 100)
+        // console.log('----------')
         clearNewTaskForm()
         toggleNewFormButton()
+        // Task.getTasks()
     })
-    }
+    Api.get('/tasks')
+      .then(function (data) {
+        console.log('here')
+        let completedTasksArr = []
+        totalTasks = data.length
+        data.forEach( task => {
+          if (task.completed === true) {
+            completedTasksArr.push(task)
+          }
+        })
+        // console.log(completedTasksArr.length)
+        // console.log(totalTasks)
+        // console.log(completedTasksArr.length / totalTasks * 100)
+        updateRenderedCircle(completedTasksArr.length / totalTasks * 100)
+      })
+  }
 
   static getTasks() {
     Api.get('/tasks')
@@ -134,7 +155,7 @@ class Task {
             allDeleteButtons[i].parentElement.id = 'hide-complete'
         }
       }
-      updateRenderedCircle((completedTasksArray.length - 1)/ (totalTasks-1) * 100)
+      // updateRenderedCircle((completedTasksArray.length - 1)/ (totalTasks-1) * 100)
 
     }) 
   }
@@ -149,9 +170,10 @@ class Task {
         Task.renderCompleted(json)
       })
       .then(function() {
+        Task.getTasks()
         // renderCirlce(percentCompleted)
         // renderCirlce((completedTasksArray.length + 1)/ totalTasks * 100)
-        updateRenderedCircle((completedTasksArray.length + 1)/ totalTasks * 100)
+        // updateRenderedCircle((completedTasksArray.length + 1)/ totalTasks * 100)
 
       })
       .catch(errors => console.log(errors))
