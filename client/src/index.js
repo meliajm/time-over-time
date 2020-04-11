@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     getFormInfo.addEventListener('submit', Task.createNewTask)
     getAllCategories()
   })
-  
+
 // event listeners
 
 // document.addEventListener('DOMContentLoaded', function() {
@@ -31,44 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
 addTaskButton.addEventListener("click", () => {
     toggleNewFormButton()
 });
-
-// functions
-
-// function card(task, color) {
-//     return `
-//     <div class="card">
-//         <div class="card-content ${color}">
-//             <p><strong>${Formatter.titleize(task.content)}</strong></p>
-//             <p id="hide-complete">By when: </p>
-//             <p>${task.category.name}</p>
-//             <h5 id="hide-complete">Completed: ${task.completed} </h5>
-//             <button class="completed-button" data-id=${task.id}>Completed!</button>
-            
-//             <button class="delete-button" data-id=${task.id}>x</button>
-//         </div>
-//     </div>
-//     <br>
-//     <br>`   
-// }
-
-// get tasks 
-// function getTasks() {
-//     Api.get('/tasks')
-//       .then(function (data) {
-//         totalTasks = data.length
-//         data.forEach( task => {
-//             if (task.completed === true) {
-//               completedTasksArray.push(task)
-//             }
-//         })
-//         tasks = data
-//         renderTasks()
-//       })
-//       .then(function () {
-//         renderCirlce(completedTasksArray.length / totalTasks * 100)
-//       })
-//       .catch(errors => console.log(errors))
-// }
 
 function renderCirlce(percentCompleted) {
     const ptag = document.getElementById('top-doc')
@@ -88,84 +50,7 @@ function circle(percentCompleted) {
     `   
 }
 
-// function renderTasks() {
-//     tasks.forEach(task => renderTask(task))
-// }
 
-// function renderTask(task) {
-//     const bigCard = document.getElementById(task.get_date) || createBigCard(task.get_date)
-//         if (task.category_id === 1) {
-//             let color = 'dodger'
-//             bigCard.insertAdjacentHTML('afterbegin', card(task, color));
-//         } else if (task.category_id == 2) {
-//             let color = 'blue'
-//             bigCard.insertAdjacentHTML('afterbegin', card(task, color));
-//         } else if (task.category_id == 11) {
-//             let color = 'royal'
-//             bigCard.insertAdjacentHTML('afterbegin', card(task, color));
-//         } else if (task.category_id == 14) {
-//             let color = 'sky'
-//             bigCard.insertAdjacentHTML('afterbegin', card(task, color));
-//         } else if (task.category_id == 15) {
-//             let color = 'selective'
-//             bigCard.insertAdjacentHTML('afterbegin', card(task, color));
-//         } else if (task.category_id == 16) {
-//             let color = 'sandstorm'
-//             bigCard.insertAdjacentHTML('afterbegin', card(task, color));
-//         } else if (task.category_id == 17) {
-//             let color = 'minion'
-//             bigCard.insertAdjacentHTML('afterbegin', card(task, color));
-//         } else if (task.category_id == 18) {
-//             let color = 'flavescent'
-//             bigCard.insertAdjacentHTML('afterbegin', card(task, color));
-//         }  
-        
-//         const btns = document.querySelectorAll('.completed-button')
-//         btns.forEach(btn => btn.addEventListener('click', completeTask))
-//         const deleteButtons = document.querySelectorAll('.delete-button')
-//         deleteButtons.forEach(button => button.addEventListener('click', deleteTask))
-        
-//         if (task.completed) {
-//             renderCompleted(task)
-//         }
-// }
-
-// function createBigCard(taskGetDate) {
-//     bigCard = document.createElement('div')
-//     bigCard.id = taskGetDate
-//     bigCard.classList.add('big-card')
-//     // getTaskList.appendChild(bigCard)
-//     getTaskList.insertBefore(bigCard, getTaskList.firstChild);
-
-//     // getTaskList.insertBefore(bigCard)
-//     // parentNode.insertBefore(newNode, referenceNode)
-//     // getTaskList.insertAdjacentElement('afterbegin', bigCard)
-//     // beforebegin
-//     return bigCard
-// }
-
-// create new task
-
-// function createNewTask(e) {
-//     e.preventDefault()
-//     const categoryName = getCategoryName()
-//     const taskContent = getTaskContent()
-//     // const taskByWhen = getTaskByWhen()
-//     let strongParams = {
-//         category: {name: categoryName},
-//         task: {
-//             content: Formatter.titleize(taskContent),
-//             // by_when: taskByWhen
-//         }
-//     }
-//     Api.post('/tasks', strongParams)
-//     .then(task => {
-//         tasks.push(task)
-//         renderTask(task)
-//         clearNewTaskForm()
-//         toggleNewFormButton()
-//     })
-//     }
     
 // new task form display
 function getAllCategories() {
@@ -192,7 +77,6 @@ function makeDropDownListOfCategories(cats) {
     selectElem.appendChild(option)
 
     cats.forEach( cat => {
-        // console.log(cat)
         const optionElem = document.createElement('option')
         optionElem.value = cat.name
         optionElem.innerHTML = cat.name
@@ -233,18 +117,18 @@ function clearNewTaskForm() {
     inputTextAll.forEach( inputText => inputText.value = "")
 }
 
-function deleteTask(event) {
-    const eventID = event.target.dataset.id 
-    Api.delete(`/tasks/${eventID}`)
-    .then(function (){
-        const allDeleteButtons = document.querySelectorAll('.delete-button')
-        for (let i=0; i<allDeleteButtons.length; i++) {
-            if (allDeleteButtons[i].dataset.id === eventID) {
-            allDeleteButtons[i].parentElement.id = 'hide-complete'
-        }
-      }
-    }) 
-}
+// function deleteTask(event) {
+//     const eventID = event.target.dataset.id 
+//     Api.delete(`/tasks/${eventID}`)
+//     .then(function (){
+//         const allDeleteButtons = document.querySelectorAll('.delete-button')
+//         for (let i=0; i<allDeleteButtons.length; i++) {
+//             if (allDeleteButtons[i].dataset.id === eventID) {
+//             allDeleteButtons[i].parentElement.id = 'hide-complete'
+//         }
+//       }
+//     }) 
+// }
 
 function completeTask(event) {
     const eventID = event.target.dataset.id

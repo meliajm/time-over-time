@@ -70,7 +70,7 @@ class Task {
         const btns = document.querySelectorAll('.completed-button')
         btns.forEach(btn => btn.addEventListener('click', completeTask))
         const deleteButtons = document.querySelectorAll('.delete-button')
-        deleteButtons.forEach(button => button.addEventListener('click', deleteTask))
+        deleteButtons.forEach(button => button.addEventListener('click', Task.deleteTask))
         
         if (this.completed) {
             renderCompleted(this)
@@ -131,9 +131,21 @@ class Task {
         renderCirlce(completedTasksArray.length / totalTasks * 100)
       })
       .catch(errors => console.log(errors))
-  
   }
 
+  static deleteTask(event) {
+    const eventID = event.target.dataset.id 
+    Api.delete(`/tasks/${eventID}`)
+    .then(function () {
+        const allDeleteButtons = document.querySelectorAll('.delete-button')
+        for (let i=0; i<allDeleteButtons.length; i++) {
+            if (allDeleteButtons[i].dataset.id === eventID) {
+            allDeleteButtons[i].parentElement.id = 'hide-complete'
+        }
+      }
+    }) 
+  }
+  
 
 
 
