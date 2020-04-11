@@ -34,7 +34,6 @@ class Api {
             body: JSON.stringify(body)
         })
         .then(response=>response.json())
-
     }
 }
 

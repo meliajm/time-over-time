@@ -118,7 +118,7 @@ button {
 
 #new-task-button {
   position: relative;
-  background-color: #1e90ff;
+  background-color: #b81eff;
   border-radius: 5px;
   height: 2rem;
   width: max-content;
@@ -131,7 +131,7 @@ button {
 
 .submit {
   position: relative;
-  background-color: #1e90ff;
+  background-color: #477750;
   border-radius: 5px;
   height: 2rem;
   width: max-content;
