@@ -68,12 +68,12 @@ class Task {
         }  
         
         const btns = document.querySelectorAll('.completed-button')
-        btns.forEach(btn => btn.addEventListener('click', completeTask))
+        btns.forEach(btn => btn.addEventListener('click', Task.completeTask))
         const deleteButtons = document.querySelectorAll('.delete-button')
         deleteButtons.forEach(button => button.addEventListener('click', Task.deleteTask))
         
         if (this.completed) {
-            renderCompleted(this)
+            Task.renderCompleted(this)
         }
   }
 
@@ -81,13 +81,7 @@ class Task {
     let bigCard = document.createElement('div')
     bigCard.id = taskGetDate
     bigCard.classList.add('big-card')
-    // getTaskList.appendChild(bigCard)
     getTaskList.insertBefore(bigCard, getTaskList.firstChild);
-
-    // getTaskList.insertBefore(bigCard)
-    // parentNode.insertBefore(newNode, referenceNode)
-    // getTaskList.insertAdjacentElement('afterbegin', bigCard)
-    // beforebegin
     return bigCard
   }
 
@@ -95,12 +89,10 @@ class Task {
     e.preventDefault()
     const categoryName = getCategoryName()
     const taskContent = getTaskContent()
-    // const taskByWhen = getTaskByWhen()
     let strongParams = {
         category: {name: categoryName},
         task: {
             content: Formatter.titleize(taskContent),
-            // by_when: taskByWhen
         }
     }
     Api.post('/tasks', strongParams)
@@ -111,8 +103,6 @@ class Task {
         toggleNewFormButton()
     })
     }
-
-    
 
   static getTasks() {
     Api.get('/tasks')
@@ -144,6 +134,51 @@ class Task {
         }
       }
     }) 
+  }
+
+  static completeTask(event) {
+    const eventID = event.target.dataset.id
+    Api.patch(`/tasks/${eventID}`, {
+        "completed": true
+        }
+      )
+      .then(function (json) {
+        Task.renderCompleted(json)
+      })
+      .then(function() {
+        // renderCirlce(percentCompleted)
+      })
+      .catch(errors => console.log(errors))
+  }
+  
+  static renderCompleted(json) {
+    const allCompletedButtons = document.querySelectorAll('.completed-button')
+    for (let i=0; i<allCompletedButtons.length; i++) {
+      if (parseInt(allCompletedButtons[i].dataset.id) === json.id) {
+        Task.colorTask(json, allCompletedButtons[i])
+      }
+    }
+  }
+
+  static colorTask(json, button) {
+
+    if (json.category_id === 1) {
+        button.classList.add('completed-task-dodger')
+    } else if (json.category_id === 2) {
+        button.classList.add('completed-task-blue')
+    } else if (json.category_id === 11) {
+        button.classList.add('completed-task-royal')
+    } else if (json.category_id === 14) {
+        button.classList.add('completed-task-sky')
+    } else if (json.category_id === 15) {
+        button.classList.add('completed-task-selective')
+    } else if (json.category_id === 16) {
+        button.classList.add('completed-task-sandstorm')
+    } else if (json.category_id === 17) {
+        button.classList.add('completed-task-minion')
+    } else if (json.category_id === 18) {
+        button.classList.add('completed-task-flavescent')
+    }
   }
   
 
