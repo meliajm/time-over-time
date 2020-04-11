@@ -99,6 +99,7 @@ class Task {
     .then(data => {
         let task = new Task(data)
         task.render()
+        updateRenderedCircle((completedTasksArray.length + 1)/ (totalTasks + 1) * 100)
         clearNewTaskForm()
         toggleNewFormButton()
     })
@@ -133,6 +134,8 @@ class Task {
             allDeleteButtons[i].parentElement.id = 'hide-complete'
         }
       }
+      updateRenderedCircle((completedTasksArray.length - 1)/ (totalTasks-1) * 100)
+
     }) 
   }
 
@@ -147,6 +150,9 @@ class Task {
       })
       .then(function() {
         // renderCirlce(percentCompleted)
+        // renderCirlce((completedTasksArray.length + 1)/ totalTasks * 100)
+        updateRenderedCircle((completedTasksArray.length + 1)/ totalTasks * 100)
+
       })
       .catch(errors => console.log(errors))
   }
@@ -181,8 +187,5 @@ class Task {
     }
   }
   
-
-
-
 
 }

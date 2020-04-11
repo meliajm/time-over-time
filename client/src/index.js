@@ -12,21 +12,12 @@ const getTaskList = document.querySelector('div.task-list')
 
 const getTaskContent = () => document.getElementById('content').value 
 const getCategoryName = () => document.getElementById('category').value
-// const getTaskByWhen = () => document.getElementById('by_when').value
 
 document.addEventListener('DOMContentLoaded', function () {
     Task.getTasks() 
     getFormInfo.addEventListener('submit', Task.createNewTask)
     getAllCategories()
   })
-
-// event listeners
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     getTasks()
-//     getFormInfo.addEventListener('submit', createNewTask)
-//     getAllCategories()
-// })
 
 addTaskButton.addEventListener("click", () => {
     toggleNewFormButton()
@@ -48,6 +39,11 @@ function circle(percentCompleted) {
         />
     </svg>
     `   
+}
+
+function updateRenderedCircle(percentCompleted) {
+    const circleElm = document.querySelector('.circle')
+    circleElm.style.strokeDasharray=`${percentCompleted}`
 }
 
 
@@ -116,51 +112,3 @@ function clearNewTaskForm() {
     const inputTextAll = document.querySelectorAll(".input-text")
     inputTextAll.forEach( inputText => inputText.value = "")
 }
-
-
-// function completeTask(event) {
-//     const eventID = event.target.dataset.id
-//     Api.patch(`/tasks/${eventID}`, {
-//         "completed": true
-//         }
-//       )
-//       .then(function (json) {
-//         renderCompleted(json)
-//       })
-//       .then(function() {
-//         // renderCirlce(percentCompleted)
-//       })
-//       .catch(errors => console.log(errors))
-//   }
-  
-//   function renderCompleted(json) {
-//     const allCompletedButtons = document.querySelectorAll('.completed-button')
-//     for (let i=0; i<allCompletedButtons.length; i++) {
-//       if (parseInt(allCompletedButtons[i].dataset.id) === json.id) {
-//         colorTask(json, allCompletedButtons[i])
-//       }
-//     }
-//   }
-
-//   function colorTask(json, button) {
-
-//     if (json.category_id === 1) {
-//         button.classList.add('completed-task-dodger')
-//     } else if (json.category_id === 2) {
-//         button.classList.add('completed-task-blue')
-//     } else if (json.category_id === 11) {
-//         button.classList.add('completed-task-royal')
-//     } else if (json.category_id === 4) {
-//         button.classList.add('completed-task-sky')
-//     } else if (json.category_id === 5) {
-//         button.classList.add('completed-task-selective')
-//     } else if (json.category_id === 6) {
-//         button.classList.add('completed-task-sandstorm')
-//     } else if (json.category_id === 7) {
-//         button.classList.add('completed-task-minion')
-//     } else if (json.category_id === 8) {
-//         button.classList.add('completed-task-flavescent')
-//     }
-//   }
-
-
