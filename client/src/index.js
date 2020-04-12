@@ -5,6 +5,7 @@ let totalTasks = 0
 let completedTasksArray = []
 
 let addTask = false
+const colorObj = {1: 'dodger', 2: 'blue', 11: 'royal', 14: 'sky', 15: 'selective', 16: 'sandstorm', 17: 'minion', 18: 'flavescent'}
 const addTaskButton = document.querySelector('#new-task-button')
 const taskForm = document.querySelector('.container')
 const getFormInfo = document.querySelector('.add-task-form')
@@ -32,7 +33,7 @@ function circle(percentCompleted) {
     return `
     <div class="square">
         <text class="text-completed">Completed</text>
-        <svg x="45" y="45 viewBox="0 0 36 36" class="circular-chart">
+        <svg x="45" y="45" viewBox="0 0 36 36" class="circular-chart">
             <path class="circle"
             stroke-dasharray="${percentCompleted}"
                 d="M18 2.0845
@@ -42,9 +43,6 @@ function circle(percentCompleted) {
         <text x="18" y="20.35" class="percentage">${parseInt(percentCompleted)}%</text>
         </svg>
     </div>
-
-    
-  
     `   
 }
 

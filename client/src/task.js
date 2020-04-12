@@ -37,35 +37,40 @@ class Task {
     Task.all.forEach(task => task.render())
   }
 
+  
   render() {
     // console.log(this)
     // console.log(this.get_date)
     const bigCard = document.getElementById(this.get_date) || Task.createBigCard(this.get_date)
-        if (this.category_id === 1) {
-            let color = 'dodger'
-            bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        } else if (this.category_id == 2) {
-            let color = 'blue'
-            bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        } else if (this.category_id == 11) {
-            let color = 'royal'
-            bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        } else if (this.category_id == 14) {
-            let color = 'sky'
-            bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        } else if (this.category_id == 15) {
-            let color = 'selective'
-            bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        } else if (this.category_id == 16) {
-            let color = 'sandstorm'
-            bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        } else if (this.category_id == 17) {
-            let color = 'minion'
-            bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        } else if (this.category_id == 18) {
-            let color = 'flavescent'
-            bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        }  
+    let color = colorObj[`${this.category_id}`]
+    console.log(color)
+    console.log(this)
+    bigCard.insertAdjacentHTML('afterbegin', this.card(color))
+        // if (this.category_id === 1) {
+        //     let color = 'dodger'
+        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
+        // } else if (this.category_id == 2) {
+        //     let color = 'blue'
+        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
+        // } else if (this.category_id == 11) {
+        //     let color = 'royal'
+        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
+        // } else if (this.category_id == 14) {
+        //     let color = 'sky'
+        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
+        // } else if (this.category_id == 15) {
+        //     let color = 'selective'
+        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
+        // } else if (this.category_id == 16) {
+        //     let color = 'sandstorm'
+        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
+        // } else if (this.category_id == 17) {
+        //     let color = 'minion'
+        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
+        // } else if (this.category_id == 18) {
+        //     let color = 'flavescent'
+        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
+        // }  
         
         const btns = document.querySelectorAll('.completed-button')
         btns.forEach(btn => btn.addEventListener('click', Task.completeTask))
