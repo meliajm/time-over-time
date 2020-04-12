@@ -159,10 +159,12 @@ class Task {
             allDeleteButtons[i].parentElement.id = 'hide-complete'
         }
       }
+      
       Task.apiCallUpdateRenderedCircle()
       // updateRenderedCircle((completedTasksArray.length - 1)/ (totalTasks-1) * 100)
 
-    }) 
+    })
+    // .then(console.log('here'))
   }
 
   static completeTask(event) {

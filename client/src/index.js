@@ -25,19 +25,26 @@ addTaskButton.addEventListener("click", () => {
 
 function renderCirlce(percentCompleted) {
     const ptag = document.getElementById('top-doc')
-    ptag.insertAdjacentHTML('beforeend', circle(percentCompleted))
+    ptag.insertAdjacentHTML('afterend', circle(percentCompleted))
 }
 
 function circle(percentCompleted) {
     return `
-    <svg viewBox="0 0 36 36" class="circular-chart">
-        <path class="circle"
-        stroke-dasharray="${percentCompleted}"
-            d="M18 2.0845
-            a 15.9155 15.9155 0 0 1 0 31.831
-            a 15.9155 15.9155 0 0 1 0 -31.831"
-        />
-    </svg>
+    <div class="square">
+        <text class="text-completed">Completed</text>
+        <svg x="45" y="45 viewBox="0 0 36 36" class="circular-chart">
+            <path class="circle"
+            stroke-dasharray="${percentCompleted}"
+                d="M18 2.0845
+                a 15.9155 15.9155 0 0 1 0 31.831
+                a 15.9155 15.9155 0 0 1 0 -31.831"
+            />
+        <text x="18" y="20.35" class="percentage">${parseInt(percentCompleted)}%</text>
+        </svg>
+    </div>
+
+    
+  
     `   
 }
 
@@ -112,3 +119,4 @@ function clearNewTaskForm() {
     const inputTextAll = document.querySelectorAll(".input-text")
     inputTextAll.forEach( inputText => inputText.value = "")
 }
+
