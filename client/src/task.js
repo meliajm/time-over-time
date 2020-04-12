@@ -136,10 +136,12 @@ class Task {
             allDeleteButtons[i].parentElement.id = 'hide-complete'
         }
       }
-      
       Task.apiCallUpdateRenderedCircle()
       // updateRenderedCircle((completedTasksArray.length - 1)/ (totalTasks-1) * 100)
-
+      
+    })
+    .then(function () {
+    // Task.apiCallUpdateRenderedCircle()
     })
     // .then(console.log('here'))
   }
@@ -173,9 +175,7 @@ class Task {
   }
 
   static colorTask(json, button) {
-
     button.classList.add(`completed-task-${colorObj[json.category_id]}`)
-
   }
   
 
