@@ -37,49 +37,21 @@ class Task {
     Task.all.forEach(task => task.render())
   }
 
-  
   render() {
-    // console.log(this)
-    // console.log(this.get_date)
     const bigCard = document.getElementById(this.get_date) || Task.createBigCard(this.get_date)
     let color = colorObj[`${this.category_id}`]
     console.log(color)
     console.log(this)
     bigCard.insertAdjacentHTML('afterbegin', this.card(color))
-        // if (this.category_id === 1) {
-        //     let color = 'dodger'
-        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        // } else if (this.category_id == 2) {
-        //     let color = 'blue'
-        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        // } else if (this.category_id == 11) {
-        //     let color = 'royal'
-        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        // } else if (this.category_id == 14) {
-        //     let color = 'sky'
-        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        // } else if (this.category_id == 15) {
-        //     let color = 'selective'
-        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        // } else if (this.category_id == 16) {
-        //     let color = 'sandstorm'
-        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        // } else if (this.category_id == 17) {
-        //     let color = 'minion'
-        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        // } else if (this.category_id == 18) {
-        //     let color = 'flavescent'
-        //     bigCard.insertAdjacentHTML('afterbegin', this.card(color));
-        // }  
         
-        const btns = document.querySelectorAll('.completed-button')
-        btns.forEach(btn => btn.addEventListener('click', Task.completeTask))
-        const deleteButtons = document.querySelectorAll('.delete-button')
-        deleteButtons.forEach(button => button.addEventListener('click', Task.deleteTask))
-        
-        if (this.completed) {
-            Task.renderCompleted(this)
-        }
+    const btns = document.querySelectorAll('.completed-button')
+    btns.forEach(btn => btn.addEventListener('click', Task.completeTask))
+    const deleteButtons = document.querySelectorAll('.delete-button')
+    deleteButtons.forEach(button => button.addEventListener('click', Task.deleteTask))
+    
+    if (this.completed) {
+        Task.renderCompleted(this)
+    }
   }
 
   static createBigCard(taskGetDate) {
@@ -202,23 +174,8 @@ class Task {
 
   static colorTask(json, button) {
 
-    if (json.category_id === 1) {
-        button.classList.add('completed-task-dodger')
-    } else if (json.category_id === 2) {
-        button.classList.add('completed-task-blue')
-    } else if (json.category_id === 11) {
-        button.classList.add('completed-task-royal')
-    } else if (json.category_id === 14) {
-        button.classList.add('completed-task-sky')
-    } else if (json.category_id === 15) {
-        button.classList.add('completed-task-selective')
-    } else if (json.category_id === 16) {
-        button.classList.add('completed-task-sandstorm')
-    } else if (json.category_id === 17) {
-        button.classList.add('completed-task-minion')
-    } else if (json.category_id === 18) {
-        button.classList.add('completed-task-flavescent')
-    }
+    button.classList.add(`completed-task-${colorObj[json.category_id]}`)
+
   }
   
 
