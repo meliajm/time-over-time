@@ -49,6 +49,10 @@ function circle(percentCompleted) {
 function updateRenderedCircle(percentCompleted) {
     const circleElm = document.querySelector('.circle')
     circleElm.style.strokeDasharray=`${percentCompleted}`
+    const circleTextElm = document.querySelector('.percentage')
+    console.log(parseInt(percentCompleted))
+    circleTextElm.innerHTML = `${parseInt(percentCompleted)}%`
+    // console.log('here')
 }
 
 
