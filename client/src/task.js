@@ -40,8 +40,8 @@ class Task {
   render() {
     const bigCard = document.getElementById(this.get_date) || Task.createBigCard(this.get_date)
     let color = colorObj[`${this.category_id}`]
-    console.log(color)
-    console.log(this)
+    // console.log(color)
+    // console.log(this)
     bigCard.insertAdjacentHTML('afterbegin', this.card(color))
         
     const btns = document.querySelectorAll('.completed-button')
@@ -133,9 +133,11 @@ class Task {
         const allDeleteButtons = document.querySelectorAll('.delete-button')
         for (let i=0; i<allDeleteButtons.length; i++) {
             if (allDeleteButtons[i].dataset.id === eventID) {
-            allDeleteButtons[i].parentElement.id = 'hide-complete'
+            // allDeleteButtons[i].parentElement.id = 'hide-complete'
+            allDeleteButtons[i].parentElement.remove()
         }
       }
+      // Task.all = Task.all.filter((task) => task.id !== eventID)
       Task.apiCallUpdateRenderedCircle()
       // updateRenderedCircle((completedTasksArray.length - 1)/ (totalTasks-1) * 100)
       
@@ -144,6 +146,10 @@ class Task {
     // Task.apiCallUpdateRenderedCircle()
     })
     // .then(console.log('here'))
+  }
+
+  deleteTask(description) {
+    this.tasks = this.tasks.filter((task) => task.description !== description);
   }
 
   static completeTask(event) {

@@ -273,6 +273,7 @@ button:hover {
 
 .input-text {
   border-radius: 5px;
+  border-color: #477750;
   height: 2rem;
   width: 60%;
   font-size: 14px;
@@ -282,6 +283,7 @@ button:hover {
 
 .input-text.date {
   border-radius: 5px;
+  border-color: #477750;
   height: 2rem;
   width: 20.9%;
   font-size: 14px;
