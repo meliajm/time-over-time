@@ -22,8 +22,8 @@ class Auth {
     static get renderLoginForm() {
         return `
         <form class="auth-form" id="login-form" action="#" method="post">
-        <input id="login-form-email" type="text" name="email" value="" placeholder="email">
-        <input id="login-form-password" type="text" name="password" value="" placeholder="password">
+        <input class="auth-form-input" id="login-form-email" type="text" name="email" value="" placeholder="email">
+        <input class="auth-form-input" id="login-form-password" type="text" name="password" value="" placeholder="password">
         <input class="auth-form" id="login-form" type="submit" value="Log In">
       </form>`
 
@@ -53,6 +53,7 @@ class Auth {
         } else {
             console.log("Email and password combo doesn't look right.")
         }
+        clearAuthForm()
     }
 
 

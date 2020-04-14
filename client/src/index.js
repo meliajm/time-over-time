@@ -165,3 +165,12 @@ function clearNewTaskForm() {
     inputTextAll.forEach( inputText => inputText.value = "")
 }
 
+function clearAuthForm() {
+    // const emailInput = document.getElementById(".login-form-email")
+    // const passwordInput = document.getElementById(".login-form-password")
+    // emailInput.value = ""
+    // passwordInput.value = ""
+    const inputTextAll = document.querySelectorAll(".auth-form-input")
+    inputTextAll.forEach( inputText => inputText.value = "")   
+}
+
