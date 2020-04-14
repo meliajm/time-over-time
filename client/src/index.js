@@ -24,6 +24,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // Task.addWeekDayToBigCard()
   })
 
+function init() {
+    Auth.getCurrentUser()
+    loadMain()
+    attachListeners()
+}
+
+function loadMain() {
+    const main = document.getElementById('main')
+}
+
 addTaskButton.addEventListener("click", () => {
     toggleNewFormButton()
 });
