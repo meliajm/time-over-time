@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users
   # resources :tasks
   resources :categories
   resources :tasks#, only: [:index, :new, :destroy]
