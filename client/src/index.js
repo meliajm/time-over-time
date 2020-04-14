@@ -32,6 +32,35 @@ function init() {
 
 function loadMain() {
     const main = document.getElementById('main')
+    Nav.resetNav()
+    main.innerHTML = Auth.renderLoginForm
+}
+
+function attachListeners() {
+    const body = document.getElementById('body')
+    body.addEventListener('click', handleBodyClick)
+}
+
+function handleBodyClick(e) {
+    e.preventDefault()
+    switch (e.target.className) {
+        case "auth-form":
+            handleAuthFormClick(e)
+            break
+        default:
+            console.log(e.target)
+    }
+
+function handleAuthFormClick(e) {
+    switch (e.target.id) {
+        case 'login-form':
+            Auth.handleLogin()
+            break
+        default:
+            console.log(e.target)
+    }
+}
+
 }
 
 addTaskButton.addEventListener("click", () => {
