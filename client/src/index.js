@@ -2,10 +2,12 @@
 let tasks = []
 const categoryNames = []
 let totalTasks = 0
-let completedTasksArray = []
+// let completedTasksArray = []
 
 let addTask = false
 const colorObj = {1: 'dodger', 2: 'blue', 11: 'royal', 14: 'sky', 15: 'selective', 16: 'sandstorm', 17: 'minion', 18: 'flavescent'}
+const daysObj = {1: 'Mon', 2: 'Tues', 3: 'Wed', 4: 'Thurs', 5: 'Fri', 6: 'Sat', 7: 'Sun'}
+
 const addTaskButton = document.querySelector('#new-task-button')
 const taskForm = document.querySelector('.container')
 const getFormInfo = document.querySelector('.add-task-form')

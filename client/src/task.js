@@ -2,6 +2,8 @@ class Task {
 
   static all = []
 
+  static completedTasksArray = []
+
   constructor(data) {
     this.id = data.id
     this.content = data.content
@@ -39,27 +41,57 @@ class Task {
 
   render() {
     const bigCard = document.getElementById(this.get_date) || Task.createBigCard(this.get_date)
+    let date = new Date(this.get_date)
     let color = colorObj[`${this.category_id}`]
     // console.log(color)
     // console.log(this)
+    // const toBeInsert = bigCard.insertAdjacentHTML('afterbegin', this.card(color))
+    // console.log(this.card(color))
+    // const tues = document.getElementById('tues')
+    // if (date.getDay() === 2) {
+    //   tues.appendChild(toBeInsert)
+    // }
     bigCard.insertAdjacentHTML('afterbegin', this.card(color))
-        
     const btns = document.querySelectorAll('.completed-button')
     btns.forEach(btn => btn.addEventListener('click', Task.completeTask))
     const deleteButtons = document.querySelectorAll('.delete-button')
     deleteButtons.forEach(button => button.addEventListener('click', Task.deleteTask))
     
     if (this.completed) {
-        Task.renderCompleted(this)
+      Task.renderCompleted(this)
     }
-  }
 
+    
+  }
+  
   static createBigCard(taskGetDate) {
+    
     let bigCard = document.createElement('div')
     bigCard.id = taskGetDate
     bigCard.classList.add('big-card')
-    getTaskList.insertBefore(bigCard, getTaskList.firstChild);
+    getTaskList.appendChild(bigCard, getTaskList.firstChild)
+    Task.addWeekDayToBigCard()
     return bigCard
+  }
+
+  static addWeekDayToBigCard() {
+    const divs = document.querySelectorAll('.big-card')
+    const h = document.createElement('h5')
+    for (let i=0; i<divs.length; i++) {
+      const dayAsNum = (new Date(divs[i].id)).getDay()
+      h.innerText = daysObj[`${dayAsNum}`]
+      divs[i].insertAdjacentElement('afterbegin', h)
+    }
+    
+    // divs.forEach( div => 
+    //   dateStr= Date(div.id);
+    //   newDate = new Date(dateStr);
+    //   dayAsNum = dateJs.getDay();
+    //   h.innerText = daysObj[`${dayAsNum}`];
+    //   div.insertAdjacentElement('afterbegin', h)
+    //   )
+    
+    // divs.forEach( div => console.log(div))
   }
 
   static createNewTask(e) {
@@ -85,25 +117,27 @@ class Task {
         clearNewTaskForm()
         toggleNewFormButton()
         // Task.getTasks()
+        Task.apiCallUpdateRenderedCircle()
     })
-    Task.apiCallUpdateRenderedCircle()
   }
 
   static apiCallUpdateRenderedCircle() {
+    let completedTasksA = []
     Api.get('/tasks')
       .then(function (data) {
         // console.log('here')
-        let completedTasksArr = []
         totalTasks = data.length
         data.forEach( task => {
           if (task.completed === true) {
-            completedTasksArr.push(task)
+            completedTasksA.push(task)
           }
         })
-        console.log(completedTasksArr.length)
+        console.log(completedTasksA.length)
         console.log(totalTasks)
-        console.log(completedTasksArr.length / totalTasks * 100)
-        updateRenderedCircle(completedTasksArr.length / totalTasks * 100)
+        console.log(completedTasksA.length / totalTasks * 100)
+      })
+      .then(function() {
+        updateRenderedCircle(completedTasksA.length / totalTasks * 100)
       })
   }
 
@@ -116,12 +150,12 @@ class Task {
         data.forEach( task => { 
 
           if (task.completed === true) {
-            completedTasksArray.push(task)
+            Task.completedTasksArray.push(task)
           }
         })
       })
       .then(function () {
-        renderCirlce(completedTasksArray.length / totalTasks * 100)
+        renderCirlce(Task.completedTasksArray.length / totalTasks * 100)
       })
       .catch(errors => console.log(errors))
   }
@@ -146,10 +180,6 @@ class Task {
     // Task.apiCallUpdateRenderedCircle()
     })
     // .then(console.log('here'))
-  }
-
-  deleteTask(description) {
-    this.tasks = this.tasks.filter((task) => task.description !== description);
   }
 
   static completeTask(event) {
