@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
     belongs_to :category
+    belongs_to :user
     validates_presence_of :content, :category#, :by_when
 
     def get_date
