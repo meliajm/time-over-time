@@ -51,7 +51,7 @@ class Task {
     // if (date.getDay() === 2) {
     //   tues.appendChild(toBeInsert)
     // }
-    bigCard.insertAdjacentHTML('afterbegin', this.card(color))
+    bigCard.insertAdjacentHTML('beforeend', this.card(color))
     const btns = document.querySelectorAll('.completed-button')
     btns.forEach(btn => btn.addEventListener('click', Task.completeTask))
     const deleteButtons = document.querySelectorAll('.delete-button')
@@ -79,14 +79,14 @@ class Task {
     const h = document.createElement('h5')
     for (let i=0; i<divs.length; i++) {
       const card = divs[i].querySelectorAll('.card-content');
-      console.log(card)
+      // console.log(card)
       const dayAsNum = (new Date(divs[i].id)).getDay()
       h.innerText = daysObj[`${dayAsNum}`]
       // let text = daysObj[`${dayAsNum}`]
       
-      // divs[i].insertAdjacentElement('afterbegin', h)
+      divs[i].insertAdjacentElement('afterbegin', h)
       // card[0].insertAdjacentElement('afterbegin', h)
-      divs[i].insertBefore(h, null)
+      // divs[i].insertBefore(h, null)
     }
     
     // divs.forEach( div => 
@@ -138,9 +138,9 @@ class Task {
             completedTasksA.push(task)
           }
         })
-        console.log(completedTasksA.length)
-        console.log(totalTasks)
-        console.log(completedTasksA.length / totalTasks * 100)
+        // console.log(completedTasksA.length)
+        // console.log(totalTasks)
+        // console.log(completedTasksA.length / totalTasks * 100)
       })
       .then(function() {
         updateRenderedCircle(completedTasksA.length / totalTasks * 100)

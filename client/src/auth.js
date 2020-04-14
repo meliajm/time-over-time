@@ -20,6 +20,7 @@ class Auth {
 
     // will need to clear out form too
     static get renderLoginForm() {
+        console.log('here')
         return `
         <br>
         <form class="auth-form" id="login-form" action="#" method="post">
@@ -31,16 +32,15 @@ class Auth {
     }
 
     static handleLogin() {
-        const email = document.getElementById('login-form-email')
-        const password = document.getElementById('login-form-password')
+        const email = document.getElementById('login-form-email').value 
+        const password = document.getElementById('login-form-password').value
 
         const userData = {
             user: {
                 email,
-                password
+                password 
             }
         }
-
         if (email && password) {
             Api.post('/login', userData)
             .then(response => {
@@ -56,6 +56,18 @@ class Auth {
         }
         clearAuthForm()
     }
+
+    static logout() {
+        Api.logout('/logout')
+        .then(response => {
+            if (response.error) {
+                console.log(response.error)
+            } else {
+                this.currentUser = {}
+                Nav.resetNav()
+            }
+        })
+      }
 
 
 

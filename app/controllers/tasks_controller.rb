@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
 
-    render json: @tasks, include: [:category], methods: :get_date
+    render json: @tasks, include: [:category, :user], methods: :get_date
   end
 
   # GET /tasks/1
@@ -15,9 +15,11 @@ class TasksController < ApplicationController
 
   # POST /tasks
   def create
+    @user = current_user
     @category = Category.find_or_create_by(name: category_params[:name])
     # @task = Task.new(task_params)
     @task = @category.tasks.build(task_params)
+    @task.user = @user
 
 
 
@@ -56,4 +58,5 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:content, :completed)
     end
+    
 end

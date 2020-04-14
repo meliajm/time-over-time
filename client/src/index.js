@@ -8,6 +8,7 @@ let addTask = false
 const colorObj = {1: 'dodger', 2: 'blue', 11: 'royal', 14: 'sky', 15: 'selective', 16: 'sandstorm', 17: 'minion', 18: 'flavescent'}
 const daysObj = {0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday'}
 
+const main = document.getElementById('main')
 const addTaskButton = document.querySelector('#new-task-button')
 const taskForm = document.querySelector('.container')
 const getFormInfo = document.querySelector('.add-task-form')
@@ -28,40 +29,64 @@ document.addEventListener('DOMContentLoaded', function () {
 function init() {
     Auth.getCurrentUser()
     loadMain()
-    attachListeners()
+    attachListenerToMain()
+    attachListenerToNav()
+    
 }
 
 function loadMain() {
-    const main = document.getElementById('main')
+    // const main = document.getElementById('main')
     Nav.resetNav()
-    main.innerHTML = Auth.renderLoginForm
+    
+    // main.innerHTML = Auth.renderLoginForm
     // console.log('here')
 }
 
-function attachListeners() {
-    const body = document.getElementById('body')
-    body.addEventListener('click', handleBodyClick)
+function attachListenerToMain() {
+    // const body = document.getElementById('body')
+    main.addEventListener('click', handleBodyClick)
+}
+function attachListenerToNav() {
+    const nav = document.getElementById('nav')
+    nav.addEventListener('click', handleBodyClick)
+
 }
 
 function handleBodyClick(e) {
     e.preventDefault()
     switch (e.target.className) {
         case "auth-form":
-            handleAuthFormClick(e)
+            handleClick(e)
             break
+        case "logout-button":
+            handleClick(e)
+            break 
+        // case "logout-button":
+
+        //     console.log('here first')
+        //     handleAuthFormClick(e)
+        //     break
+        // case '.submit':
+        //     Task.createNewTask(e)
+        //     break 
         default:
             console.log(e.target)
+        }
     }
-}
-
-function handleAuthFormClick(e) {
-    switch (e.target.id) {
-        case 'login-form':
-            Auth.handleLogin()
-            break
-        case 'task-form':
-            Task.createNewTask(e)
-            break
+    
+    function handleClick(e) {
+        switch (e.target.id) {
+            case 'login-form':
+                Auth.handleLogin()
+                break
+            case 'logout':
+                // console.log('here--')
+                
+                Auth.logout()
+                break
+            //     case 'logout':
+            // Auth.logout()
+            // break
         default:
             console.log(e.target)
     }
@@ -71,6 +96,9 @@ function handleAuthFormClick(e) {
 addTaskButton.addEventListener("click", () => {
     toggleNewFormButton()
 });
+
+
+
 
 function renderCirlce(percentCompleted) {
     const ptag = document.getElementById('top-doc')
