@@ -6,12 +6,13 @@ let totalTasks = 0
 
 let addTask = false
 const colorObj = {1: 'dodger', 2: 'blue', 11: 'royal', 14: 'sky', 15: 'selective', 16: 'sandstorm', 17: 'minion', 18: 'flavescent'}
-const daysObj = {1: 'Mon', 2: 'Tues', 3: 'Wed', 4: 'Thurs', 5: 'Fri', 6: 'Sat', 7: 'Sun'}
+const daysObj = {0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday'}
 
 const addTaskButton = document.querySelector('#new-task-button')
 const taskForm = document.querySelector('.container')
 const getFormInfo = document.querySelector('.add-task-form')
 const getTaskList = document.querySelector('div.task-list')
+
 
 const getTaskContent = () => document.getElementById('content').value 
 const getCategoryName = () => document.getElementById('category').value
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     Task.getTasks() 
     getFormInfo.addEventListener('submit', Task.createNewTask)
     getAllCategories()
+    // Task.addWeekDayToBigCard()
   })
 
 addTaskButton.addEventListener("click", () => {

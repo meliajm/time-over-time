@@ -41,7 +41,7 @@ class Task {
 
   render() {
     const bigCard = document.getElementById(this.get_date) || Task.createBigCard(this.get_date)
-    let date = new Date(this.get_date)
+    // let date = new Date(this.get_date)
     let color = colorObj[`${this.category_id}`]
     // console.log(color)
     // console.log(this)
@@ -78,9 +78,15 @@ class Task {
     const divs = document.querySelectorAll('.big-card')
     const h = document.createElement('h5')
     for (let i=0; i<divs.length; i++) {
+      const card = divs[i].querySelectorAll('.card-content');
+      console.log(card)
       const dayAsNum = (new Date(divs[i].id)).getDay()
       h.innerText = daysObj[`${dayAsNum}`]
-      divs[i].insertAdjacentElement('afterbegin', h)
+      // let text = daysObj[`${dayAsNum}`]
+      
+      // divs[i].insertAdjacentElement('afterbegin', h)
+      // card[0].insertAdjacentElement('afterbegin', h)
+      divs[i].insertBefore(h, null)
     }
     
     // divs.forEach( div => 
