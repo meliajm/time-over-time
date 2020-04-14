@@ -1,5 +1,5 @@
 class Api {
-    static base_url = 'http://localhost:3000'
+    static base_url = 'http://localhost:3001'
 
     static headers = {
         'Accept': 'application/json',

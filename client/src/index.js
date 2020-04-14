@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     Task.getTasks() 
     getFormInfo.addEventListener('submit', Task.createNewTask)
     getAllCategories()
+    init()
     // Task.addWeekDayToBigCard()
   })
 
@@ -34,6 +35,7 @@ function loadMain() {
     const main = document.getElementById('main')
     Nav.resetNav()
     main.innerHTML = Auth.renderLoginForm
+    // console.log('here')
 }
 
 function attachListeners() {
@@ -50,16 +52,19 @@ function handleBodyClick(e) {
         default:
             console.log(e.target)
     }
+}
 
 function handleAuthFormClick(e) {
     switch (e.target.id) {
         case 'login-form':
             Auth.handleLogin()
             break
+        case 'task-form':
+            Task.createNewTask(e)
+            break
         default:
             console.log(e.target)
     }
-}
 
 }
 
@@ -135,6 +140,7 @@ function makeDropDownListOfCategories(cats) {
     inputSubmit.name = 'name'
     inputSubmit.value = 'Create'
     inputSubmit.classList.add('submit')
+    inputSubmit.id = 'task-form'
     const brk = document.createElement('br')
     getFormInfo.appendChild(brk)
     getFormInfo.appendChild(inputSubmit)
