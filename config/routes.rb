@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  post '/login', to: 'sessions#new'
+  post '/logout', to: 'sessions#destroy'
+
   resources :users
   # resources :tasks
   resources :categories
