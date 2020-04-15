@@ -36,21 +36,14 @@ class Task {
   }
 
   static renderTasks() {
-    Task.all.forEach(task => task.render())
+    Task.all.reverse().forEach(task => task.render())
   }
 
   render() {
     const bigCard = document.getElementById(this.get_date) || Task.createBigCard(this.get_date)
+    // Task.createMonthCard(this.get_date)
     // let date = new Date(this.get_date)
     let color = colorObj[`${this.category_id}`]
-    // console.log(color)
-    // console.log(this)
-    // const toBeInsert = bigCard.insertAdjacentHTML('afterbegin', this.card(color))
-    // console.log(this.card(color))
-    // const tues = document.getElementById('tues')
-    // if (date.getDay() === 2) {
-    //   tues.appendChild(toBeInsert)
-    // }
     bigCard.insertAdjacentHTML('beforeend', this.card(color))
     const btns = document.querySelectorAll('.completed-button')
     btns.forEach(btn => btn.addEventListener('click', Task.completeTask))
@@ -59,26 +52,44 @@ class Task {
     
     if (this.completed) {
       Task.renderCompleted(this)
-    }
-
-    
+    }    
   }
   
   static createBigCard(taskGetDate) {
-    
+    const taskMonth = taskGetDate.slice(0, 2)
+    const monthCard = document.getElementById(taskMonth) || Task.createMonthCard(taskMonth)
+    // let monthCards = getTaskList.querySelectorAll('.month-card')
     let bigCard = document.createElement('div')
     bigCard.id = taskGetDate
     bigCard.classList.add('big-card')
-    getTaskList.appendChild(bigCard, getTaskList.firstChild)
+    monthCard.appendChild(bigCard)
+    // getTaskList.appendChild(bigCard)
+    
+    // getTaskList.insertAdjacentElement('afterbegin',  bigCard)
+    // console.log('here')
+    // monthCards.forEach(monthCard =>  {
+    //   if (bigCard.id.slice(0, 2) === monthCard.id) {
+    //     monthCard.appendChild(bigCard)
+    //   }
+    // }
+    // )
     Task.addWeekDayToBigCard()
     return bigCard
+  }
+
+  static createMonthCard(taskMonth) {
+    let monthCard = document.createElement('div')
+    monthCard.id = taskMonth
+    monthCard.classList.add('month-card')
+    getTaskList.insertBefore(monthCard, null)
+    return monthCard
   }
 
   static addWeekDayToBigCard() {
     const divs = document.querySelectorAll('.big-card')
     const h = document.createElement('h5')
     for (let i=0; i<divs.length; i++) {
-      const card = divs[i].querySelectorAll('.card-content');
+      // const card = divs[i].querySelectorAll('.card-content');
       // console.log(card)
       const dayAsNum = (new Date(divs[i].id)).getDay()
       h.innerText = daysObj[`${dayAsNum}`]
