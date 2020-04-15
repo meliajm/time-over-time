@@ -11,11 +11,15 @@ class Task {
     this.completed = data.completed
     this.get_date = data.get_date
     this.category_id = data.category_id
+    this.user_id = data.user_id
+    this.user = data.user
     this.save()
   }
 
   save() {
-    Task.all.push(this)
+    if (Auth.currentUser.id === this.user_id) {
+      Task.all.push(this)
+    }
   }
 
   card(color) {
@@ -63,26 +67,34 @@ class Task {
     bigCard.id = taskGetDate
     bigCard.classList.add('big-card')
     monthCard.appendChild(bigCard)
-    // getTaskList.appendChild(bigCard)
-    
-    // getTaskList.insertAdjacentElement('afterbegin',  bigCard)
-    // console.log('here')
-    // monthCards.forEach(monthCard =>  {
-    //   if (bigCard.id.slice(0, 2) === monthCard.id) {
-    //     monthCard.appendChild(bigCard)
-    //   }
-    // }
-    // )
     Task.addWeekDayToBigCard()
     return bigCard
   }
 
+  
+
   static createMonthCard(taskMonth) {
     let monthCard = document.createElement('div')
+    const ptag = document.createElement('p')
+    // monthCard.appendChild(ptag)
+    ptag.classList = 'month-header'
     monthCard.id = taskMonth
     monthCard.classList.add('month-card')
     getTaskList.insertBefore(monthCard, null)
+    Task.addMonthNameToMonthCard()
     return monthCard
+  }
+
+  static addMonthNameToMonthCard() {
+    const monthsObj = {'01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr', '05': 'May', '06': 'June', '07': 'Jul', '08': 'Aug', '09': 'Sep', '10': 'Oct', '11': 'Nov', '12': 'Dec'}
+    const divs = document.querySelectorAll('.month-card')
+    const h = document.createElement('h5')
+    for (let i=0; i<divs.length; i++) {
+      const monthName = divs[i].id
+      h.innerText = monthsObj[monthName]
+      divs[i].insertAdjacentText('afterbegin', h.innerText)
+    }
+    
   }
 
   static addWeekDayToBigCard() {
@@ -174,7 +186,7 @@ class Task {
       .then(function () {
         renderCirlce(Task.completedTasksArray.length / totalTasks * 100)
       })
-      .catch(errors => console.log(errors))
+      // .catch(errors => console.log(errors))
   }
 
   static deleteTask(event) {
