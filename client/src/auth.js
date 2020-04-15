@@ -70,8 +70,12 @@ class Auth {
                 if (response.error) {
                     console.log(response.error)
                 } else {
-                    this.handleResponse(bind.this)
-                    // Nav.resetNav()
+                    this.handleResponse.bind(this)
+                    // debugger
+                    // JSON.parse(response.current_user)
+                    this.setCurrentUser(response.current_user)
+                    // console.log(response)
+                    Nav.resetNav()
                 }
             })
         } else {

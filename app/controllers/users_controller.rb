@@ -18,7 +18,14 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user, status: :created
+      # render json: @user, 
+      session[:user_id] = @user.id
+      render json: {
+                current_user: @user.as_json(except: [:password_digest]),
+                logged_in: logged_in?
+            },
+            status: :created
+
     else
       render json: @user.errors, status: :unprocessable_entity
     end
