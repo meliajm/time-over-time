@@ -5,7 +5,6 @@ class Auth {
     static setCurrentUser(user) {
         this.currentUser = user
     }
-
     static getCurrentUser() {
         Api.get('/get_current_user')
         .then(response => {

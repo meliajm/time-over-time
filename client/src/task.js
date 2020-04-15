@@ -94,33 +94,16 @@ class Task {
       h.innerText = monthsObj[monthName]
       divs[i].insertAdjacentText('afterbegin', h.innerText)
     }
-    
   }
 
   static addWeekDayToBigCard() {
     const divs = document.querySelectorAll('.big-card')
     const h = document.createElement('h5')
     for (let i=0; i<divs.length; i++) {
-      // const card = divs[i].querySelectorAll('.card-content');
-      // console.log(card)
       const dayAsNum = (new Date(divs[i].id)).getDay()
       h.innerText = daysObj[`${dayAsNum}`]
-      // let text = daysObj[`${dayAsNum}`]
-      
       divs[i].insertAdjacentElement('afterbegin', h)
-      // card[0].insertAdjacentElement('afterbegin', h)
-      // divs[i].insertBefore(h, null)
     }
-    
-    // divs.forEach( div => 
-    //   dateStr= Date(div.id);
-    //   newDate = new Date(dateStr);
-    //   dayAsNum = dateJs.getDay();
-    //   h.innerText = daysObj[`${dayAsNum}`];
-    //   div.insertAdjacentElement('afterbegin', h)
-    //   )
-    
-    // divs.forEach( div => console.log(div))
   }
 
   static createNewTask(e) {
@@ -137,54 +120,53 @@ class Task {
     .then(data => {
         let task = new Task(data)
         task.render()
-        // console.log('here')
-        // console.log((completedTasksArray.length))
-        // console.log((totalTasks + 1))
-        // updateRenderedCircle((completedTasksArray.length)/ (totalTasks) * 100)
-        // console.log((completedTasksArray.length)/ (totalTasks + 1) * 100)
-        // console.log('----------')
+        
         clearNewTaskForm()
         toggleNewFormButton()
-        // Task.getTasks()
         Task.apiCallUpdateRenderedCircle()
     })
   }
 
   static apiCallUpdateRenderedCircle() {
     let completedTasksA = []
+    let totalTasks = []
     Api.get('/tasks')
       .then(function (data) {
-        // console.log('here')
-        totalTasks = data.length
+        // totalTasks = data.length
         data.forEach( task => {
-          if (task.completed === true) {
+          if (task.completed === true && task.user_id === Auth.currentUser.id) {
             completedTasksA.push(task)
           }
+          if (task.user_id === Auth.currentUser.id) {
+            totalTasks.push(task)
+          }
         })
-        // console.log(completedTasksA.length)
-        // console.log(totalTasks)
-        // console.log(completedTasksA.length / totalTasks * 100)
+        // debugger
       })
       .then(function() {
-        updateRenderedCircle(completedTasksA.length / totalTasks * 100)
+        updateRenderedCircle(completedTasksA.length / totalTasks.length * 100)
       })
   }
 
   static getTasks() {
+    let completedTasksA = []
+    let totalTasks = []
     Api.get('/tasks')
       .then(function (data) {
-        totalTasks = data.length
+        
         data.forEach( task => new Task(task))
           Task.renderTasks()
         data.forEach( task => { 
-
-          if (task.completed === true) {
-            Task.completedTasksArray.push(task)
+          if (task.completed === true && task.user_id === Auth.currentUser.id) {
+            completedTasksA.push(task)
+          }
+          if (task.user_id === Auth.currentUser.id) {
+            totalTasks.push(task)
           }
         })
+        renderCirlce(completedTasksA.length / totalTasks.length * 100)
       })
       .then(function () {
-        renderCirlce(Task.completedTasksArray.length / totalTasks * 100)
       })
       // .catch(errors => console.log(errors))
   }
@@ -196,19 +178,11 @@ class Task {
         const allDeleteButtons = document.querySelectorAll('.delete-button')
         for (let i=0; i<allDeleteButtons.length; i++) {
             if (allDeleteButtons[i].dataset.id === eventID) {
-            // allDeleteButtons[i].parentElement.id = 'hide-complete'
             allDeleteButtons[i].parentElement.remove()
         }
       }
-      // Task.all = Task.all.filter((task) => task.id !== eventID)
-      Task.apiCallUpdateRenderedCircle()
-      // updateRenderedCircle((completedTasksArray.length - 1)/ (totalTasks-1) * 100)
-      
+      Task.apiCallUpdateRenderedCircle()      
     })
-    .then(function () {
-    // Task.apiCallUpdateRenderedCircle()
-    })
-    // .then(console.log('here'))
   }
 
   static completeTask(event) {

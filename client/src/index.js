@@ -1,7 +1,7 @@
 // variables
 let tasks = []
 const categoryNames = []
-let totalTasks = 0
+// let totalTasks = 0
 // let completedTasksArray = []
 
 let addTask = false
