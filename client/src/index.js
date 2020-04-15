@@ -61,6 +61,9 @@ function handleBodyClick(e) {
         case "logout-button":
             handleClick(e)
             break 
+        case "signup-form":
+            handleClick(e)
+            break 
         // case "logout-button":
 
         //     console.log('here first')
@@ -81,9 +84,12 @@ function handleBodyClick(e) {
                 break
             case 'logout':
                 // console.log('here--')
-                
                 Auth.logout()
                 break
+            case 'signup-form-submit':
+                console.log('here')
+                Auth.handleSignup()
+                break 
             //     case 'logout':
             // Auth.logout()
             // break

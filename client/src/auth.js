@@ -57,6 +57,44 @@ class Auth {
         clearAuthForm()
     }
 
+    static loginOrSignUp(url, email, password) {
+        const userData = {
+            user: {
+                email,
+                password 
+            }
+        }
+        if (email && password) {
+            Api.post(url, userData)
+            .then(response => {
+                if (response.error) {
+                    console.log(response.error)
+                } else {
+                    this.handleResponse(bind.this)
+                    // Nav.resetNav()
+                }
+            })
+        } else {
+            console.log("hmm.")
+        }
+        // clearAuthForm()
+    }
+
+    static handleSignup() {
+        const email = document.getElementById('signup-form-email').value
+        const password = document.getElementById('signup-form-password').value
+        this.loginOrSignUp('/users', email, password)
+    }
+
+    static handleResponse(response) {
+        if (response.error) {
+            console.log(response.error)
+        } else {
+            this.setCurrentUser(new User(response.current_user))
+            Nav.resetNav()
+        }
+    }
+
     static logout() {
         Api.logout('/logout')
         .then(response => {
