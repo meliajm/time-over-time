@@ -1,8 +1,5 @@
-// variables
 let tasks = []
 const categoryNames = []
-// let totalTasks = 0
-// let completedTasksArray = []
 
 let addTask = false
 const colorObj = {1: 'dodger', 2: 'blue', 11: 'royal', 14: 'sky', 15: 'selective', 16: 'sandstorm', 17: 'minion', 18: 'flavescent'}
@@ -28,17 +25,17 @@ document.addEventListener('DOMContentLoaded', function () {
 function init() {
     
     Auth.getCurrentUser()
-    // .then( 
-    //     Task.getTasks()
-    // )
+    .finally(function() {
+        loadMain()
+        attachListenerToMain()
+        attachListenerToNav()
+        Task.getTasks()
+
+    })
     console.log('mmm----------')
-         // .then(response => {
-    //     
-    // })
-    // console.log(Auth.currentUser)
-    loadMain()
-    attachListenerToMain()
-    attachListenerToNav()
+    console.log(`cu: ${Auth.currentUser.email}`)
+    console.log(Auth.currentUser)
+    
 
     // Auth.setCurrentUser(response.current_user)
    

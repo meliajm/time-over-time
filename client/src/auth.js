@@ -6,7 +6,7 @@ class Auth {
         this.currentUser = user
     }
     static getCurrentUser() {
-        Api.get('/get_current_user')
+        return Api.get('/get_current_user')
         .then(response => {
             if (response.logged_in) {
                 this.setCurrentUser(response.current_user)
@@ -81,6 +81,7 @@ class Auth {
                     this.setCurrentUser(response.current_user)
                     // console.log(response)
                     Nav.resetNav() 
+                    console.log('a')
                 }
             })
         } else {
@@ -100,6 +101,7 @@ class Auth {
             console.log(response.error)
         } else {
             this.setCurrentUser(new User(response.current_user))
+            console.log('b')
             Nav.resetNav()
         }
     }
