@@ -139,12 +139,17 @@ class Task {
         })
       })
       .then(function() {
-        updateRenderedCircle(completedTasksA.length / totalTasks.length * 100)
+          if (completedTasksA.length === 0) {
+            updateRenderedCircle(0)
+          } else {
+            updateRenderedCircle(completedTasksA.length / totalTasks.length * 100)
+          }
+      
       })
   }
 
   static getTasks() {
-    console.log(Auth.currentUser)
+    // console.log(Auth.currentUser)
     if (Auth.currentUser.email) {
 
       let completedTasksA = []
@@ -165,7 +170,6 @@ class Task {
         // if (totalTasks.length>0) {
         if (Task.all.length === 0) {
           renderCirlce(0)
-          console.log('here render circle 0')
         } else {
           renderCirlce(completedTasksA.length / totalTasks.length * 100)
         }
@@ -176,7 +180,6 @@ class Task {
       })
       .catch(errors => console.log(errors))
     } else {
-      // console.log('h1')
       Task.clearTasksFromDom()
     }
   }
