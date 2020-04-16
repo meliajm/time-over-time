@@ -3,6 +3,4 @@ class User {
         this.id = data.id
         this.email = data.email
     }
-
-   
 }

@@ -110,9 +110,8 @@ class Auth {
                 this.currentUser = {}
                 console.log(Auth.currentUser.email)
                 Nav.resetNav()
-                // debugger
-                Task.getTasks()
-                // init()
+                Task.all = []
+                Task.clearTasksFromDom()
             }
         })
       }

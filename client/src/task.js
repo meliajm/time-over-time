@@ -2,8 +2,6 @@ class Task {
 
   static all = []
 
-  static completedTasksArray = []
-
   constructor(data) {
     this.id = data.id
     this.content = data.content
@@ -145,8 +143,9 @@ class Task {
   }
 
   static getTasks(bool) {
-    console.log(bool)
+  
     console.log(Auth.currentUser.email)
+
     if (Auth.currentUser.email) {
 
       let completedTasksA = []
@@ -176,20 +175,12 @@ class Task {
     } else {
       // console.log('h1')
       Task.clearTasksFromDom()
-
-        // return `
-        // console.log('i do not want to see any tasks on dom now')
-
-        // `
-
+      let completedTasksA = []
+      let totalTasks = []
     }
   }
 
   static clearTasksFromDom() {
-    // let noData = []
-    // noData.forEach( task => new Task(task))
-    // Task.renderTasks()
-    // console.log(noData)
     const divTaskList =  document.querySelector('.task-list')
     divTaskList.innerHTML = ''
       
