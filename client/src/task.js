@@ -182,6 +182,12 @@ class Task {
       
   }
 
+  static clearDivSquare() {
+    const divSquare = document.querySelector('div.square')
+    divSquare.innerHTML = ""
+
+  }
+
   static deleteTask(event) {
     const eventID = event.target.dataset.id 
     Api.delete(`/tasks/${eventID}`)

@@ -132,7 +132,8 @@ function circle(percentCompleted) {
         <text class="text-completed">Completed</text>
         <svg x="45" y="45" viewBox="0 0 36 36" class="circular-chart">
             <path class="circle"
-            stroke-dasharray="${percentCompleted}"
+            stroke-dasharray="${percentCompleted}, 100"
+            
                 d="M18 2.0845
                 a 15.9155 15.9155 0 0 1 0 31.831
                 a 15.9155 15.9155 0 0 1 0 -31.831"

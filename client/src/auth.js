@@ -115,6 +115,8 @@ class Auth {
                 Nav.resetNav()
                 Task.all = []
                 Task.clearTasksFromDom()
+                // clear circle
+                Task.clearDivSquare()
             }
         })
       }
