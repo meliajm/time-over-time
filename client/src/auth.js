@@ -31,6 +31,7 @@ class Auth {
     }
 
     static handleLogin() {
+        let bool = 'do not rerender circle only the one circle needed'
         const email = document.getElementById('login-form-email').value 
         const password = document.getElementById('login-form-password').value
 
@@ -48,6 +49,8 @@ class Auth {
                 } else {
                     this.setCurrentUser(response.current_user)
                     Nav.resetNav()
+                    console.log('here----------')
+                    Task.getTasks(bool)
                 }
             })
         } else {
@@ -74,7 +77,7 @@ class Auth {
                     // JSON.parse(response.current_user)
                     this.setCurrentUser(response.current_user)
                     // console.log(response)
-                    Nav.resetNav()
+                    Nav.resetNav() 
                 }
             })
         } else {
@@ -105,7 +108,11 @@ class Auth {
                 console.log(response.error)
             } else {
                 this.currentUser = {}
+                console.log(Auth.currentUser.email)
                 Nav.resetNav()
+                // debugger
+                Task.getTasks()
+                // init()
             }
         })
       }

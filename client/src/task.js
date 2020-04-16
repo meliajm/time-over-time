@@ -71,8 +71,6 @@ class Task {
     return bigCard
   }
 
-  
-
   static createMonthCard(taskMonth) {
     let monthCard = document.createElement('div')
     const ptag = document.createElement('p')
@@ -132,7 +130,6 @@ class Task {
     let totalTasks = []
     Api.get('/tasks')
       .then(function (data) {
-        // totalTasks = data.length
         data.forEach( task => {
           if (task.completed === true && task.user_id === Auth.currentUser.id) {
             completedTasksA.push(task)
@@ -141,21 +138,24 @@ class Task {
             totalTasks.push(task)
           }
         })
-        // debugger
       })
       .then(function() {
         updateRenderedCircle(completedTasksA.length / totalTasks.length * 100)
       })
   }
 
-  static getTasks() {
-    let completedTasksA = []
-    let totalTasks = []
-    Api.get('/tasks')
+  static getTasks(bool) {
+    console.log(bool)
+    console.log(Auth.currentUser.email)
+    if (Auth.currentUser.email) {
+
+      let completedTasksA = []
+      let totalTasks = []
+      Api.get('/tasks')
       .then(function (data) {
         
         data.forEach( task => new Task(task))
-          Task.renderTasks()
+        Task.renderTasks()
         data.forEach( task => { 
           if (task.completed === true && task.user_id === Auth.currentUser.id) {
             completedTasksA.push(task)
@@ -164,11 +164,35 @@ class Task {
             totalTasks.push(task)
           }
         })
-        renderCirlce(completedTasksA.length / totalTasks.length * 100)
+        if (!bool) {
+          renderCirlce(completedTasksA.length / totalTasks.length * 100)
+        }
+        console.log(completedTasksA)
+        console.log(totalTasks)
       })
       .then(function () {
       })
-      // .catch(errors => console.log(errors))
+      .catch(errors => console.log(errors))
+    } else {
+      // console.log('h1')
+      Task.clearTasksFromDom()
+
+        // return `
+        // console.log('i do not want to see any tasks on dom now')
+
+        // `
+
+    }
+  }
+
+  static clearTasksFromDom() {
+    // let noData = []
+    // noData.forEach( task => new Task(task))
+    // Task.renderTasks()
+    // console.log(noData)
+    const divTaskList =  document.querySelector('.task-list')
+    divTaskList.innerHTML = ''
+      
   }
 
   static deleteTask(event) {
