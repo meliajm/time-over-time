@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
 function init() {
     
     Auth.getCurrentUser()
-    .then( 
-        Task.getTasks()
-    )
+    // .then( 
+    //     Task.getTasks()
+    // )
     console.log('mmm----------')
          // .then(response => {
     //     

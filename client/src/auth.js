@@ -75,7 +75,8 @@ class Auth {
                     console.log(response.error)
                 } else {
                     this.handleResponse.bind(this)
-                    // debugger
+                    // console.log('this')
+                    // console.log(this)
                     // JSON.parse(response.current_user)
                     this.setCurrentUser(response.current_user)
                     // console.log(response)
