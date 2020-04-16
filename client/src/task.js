@@ -142,10 +142,8 @@ class Task {
       })
   }
 
-  static getTasks(bool) {
-  
-    console.log(Auth.currentUser.email)
-
+  static getTasks() {
+    console.log(Auth.currentUser)
     if (Auth.currentUser.email) {
 
       let completedTasksA = []
@@ -163,9 +161,9 @@ class Task {
             totalTasks.push(task)
           }
         })
-        if (!bool) {
+        // if (!bool) {
           renderCirlce(completedTasksA.length / totalTasks.length * 100)
-        }
+        // }
         console.log(completedTasksA)
         console.log(totalTasks)
       })
@@ -175,8 +173,6 @@ class Task {
     } else {
       // console.log('h1')
       Task.clearTasksFromDom()
-      let completedTasksA = []
-      let totalTasks = []
     }
   }
 

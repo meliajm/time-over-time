@@ -2,7 +2,10 @@ class Nav {
     
     static render() {
         // return Auth.currentUser.email ? `Hello, ${Auth.currentUser.email}` : 'Not logged in.'
+        // console.log('h')
         if (Auth.currentUser.email) {
+            console.log(Auth.currentUser)
+            // Task.getTasks()
             return `Hello, ${Auth.currentUser.email}
             <button id=logout class="logout-button">Logout</button>
             `
@@ -26,6 +29,7 @@ class Nav {
 
     static resetNav() {
         const navDiv = document.getElementById('nav')
+        console.log('resetnav')
         navDiv.innerHTML = this.render()
     }
 

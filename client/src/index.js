@@ -19,24 +19,39 @@ const getTaskContent = () => document.getElementById('content').value
 const getCategoryName = () => document.getElementById('category').value
 
 document.addEventListener('DOMContentLoaded', function () {
-    Task.getTasks() 
-    getFormInfo.addEventListener('submit', Task.createNewTask)
-    getAllCategories()
     init()
-    // Task.addWeekDayToBigCard()
+    getAllCategories()
+    getFormInfo.addEventListener('submit', Task.createNewTask)
+    
   })
 
 function init() {
+    
     Auth.getCurrentUser()
+    .then( 
+        Task.getTasks()
+    )
+    console.log('mmm----------')
+         // .then(response => {
+    //     
+    // })
+    // console.log(Auth.currentUser)
     loadMain()
     attachListenerToMain()
     attachListenerToNav()
+
+    // Auth.setCurrentUser(response.current_user)
+   
+     
     
 }
 
 function loadMain() {
     // const main = document.getElementById('main')
     Nav.resetNav()
+    // .then(function() {
+    //     Task.getTasks()
+    // })
     
     // main.innerHTML = Auth.renderLoginForm
     // console.log('here')

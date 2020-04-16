@@ -10,7 +10,9 @@ class Auth {
         .then(response => {
             if (response.logged_in) {
                 this.setCurrentUser(response.current_user)
-                Nav.resetNav()
+                // console.log('getcurrentuser')
+                // Nav.resetNav()
+                console.log(`getcurrentuser ${Auth.currentUser.email}`)
             } else {
                 console.log(response.error)
             }
@@ -31,7 +33,7 @@ class Auth {
     }
 
     static handleLogin() {
-        let bool = 'do not rerender circle only the one circle needed'
+        // let bool = 'do not rerender circle only the one circle needed'
         const email = document.getElementById('login-form-email').value 
         const password = document.getElementById('login-form-password').value
 
@@ -50,7 +52,7 @@ class Auth {
                     this.setCurrentUser(response.current_user)
                     Nav.resetNav()
                     console.log('here----------')
-                    Task.getTasks(bool)
+                    Task.getTasks()
                 }
             })
         } else {
@@ -115,9 +117,5 @@ class Auth {
             }
         })
       }
-
-
-
-
 
 }
