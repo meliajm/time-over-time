@@ -10,8 +10,6 @@ class Auth {
         .then(response => {
             if (response.logged_in) {
                 this.setCurrentUser(response.current_user)
-                // console.log('getcurrentuser')
-                // Nav.resetNav()
                 console.log(`getcurrentuser ${Auth.currentUser.email}`)
             } else {
                 console.log(response.error)
@@ -19,7 +17,6 @@ class Auth {
         })
     }
 
-    // will need to clear out form too
     static get renderLoginForm() {
         console.log('here')
         return `
@@ -75,19 +72,15 @@ class Auth {
                     console.log(response.error)
                 } else {
                     this.handleResponse.bind(this)
-                    // console.log('this')
-                    // console.log(this)
-                    // JSON.parse(response.current_user)
                     this.setCurrentUser(response.current_user)
-                    // console.log(response)
                     Nav.resetNav() 
-                    console.log('a')
+                    renderCirlce(0)
+                    // Task.getTasks()
                 }
             })
         } else {
             console.log("hmm.")
         }
-        // clearAuthForm()
     }
 
     static handleSignup() {
@@ -101,7 +94,6 @@ class Auth {
             console.log(response.error)
         } else {
             this.setCurrentUser(new User(response.current_user))
-            console.log('b')
             Nav.resetNav()
         }
     }
@@ -117,7 +109,6 @@ class Auth {
                 Nav.resetNav()
                 Task.all = []
                 Task.clearTasksFromDom()
-                // clear circle
                 Task.clearDivSquare()
             }
         })

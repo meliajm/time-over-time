@@ -124,6 +124,7 @@ class Task {
   }
 
   static apiCallUpdateRenderedCircle() {
+    // debugger
     let completedTasksA = []
     let totalTasks = []
     Api.get('/tasks')
@@ -161,9 +162,13 @@ class Task {
             totalTasks.push(task)
           }
         })
-        // if (!bool) {
+        // if (totalTasks.length>0) {
+        if (Task.all.length === 0) {
+          renderCirlce(0)
+          console.log('here render circle 0')
+        } else {
           renderCirlce(completedTasksA.length / totalTasks.length * 100)
-        // }
+        }
         console.log(completedTasksA)
         console.log(totalTasks)
       })

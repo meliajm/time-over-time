@@ -34,34 +34,20 @@ function init() {
     })
     console.log('mmm----------')
     console.log(`cu: ${Auth.currentUser.email}`)
-    console.log(Auth.currentUser)
-    
-
-    // Auth.setCurrentUser(response.current_user)
-   
-     
-    
+    console.log(Auth.currentUser)    
 }
 
 function loadMain() {
-    // const main = document.getElementById('main')
-    Nav.resetNav()
-    // .then(function() {
-    //     Task.getTasks()
-    // })
-    
-    // main.innerHTML = Auth.renderLoginForm
-    // console.log('here')
+    Nav.resetNav()    
 }
 
 function attachListenerToMain() {
-    // const body = document.getElementById('body')
     main.addEventListener('click', handleBodyClick)
 }
+
 function attachListenerToNav() {
     const nav = document.getElementById('nav')
     nav.addEventListener('click', handleBodyClick)
-
 }
 
 function handleBodyClick(e) {
@@ -76,47 +62,30 @@ function handleBodyClick(e) {
         case "signup-form":
             handleClick(e)
             break 
-        // case "logout-button":
-
-        //     console.log('here first')
-        //     handleAuthFormClick(e)
-        //     break
-        // case '.submit':
-        //     Task.createNewTask(e)
-        //     break 
         default:
             console.log(e.target)
         }
     }
     
-    function handleClick(e) {
-        switch (e.target.id) {
-            case 'login-form':
-                Auth.handleLogin()
-                break
-            case 'logout':
-                // console.log('here--')
-                Auth.logout()
-                break
-            case 'signup-form-submit':
-                console.log('here')
-                Auth.handleSignup()
-                break 
-            //     case 'logout':
-            // Auth.logout()
-            // break
-        default:
-            console.log(e.target)
+function handleClick(e) {
+    switch (e.target.id) {
+        case 'login-form':
+            Auth.handleLogin()
+            break
+        case 'logout':
+            Auth.logout()
+            break
+        case 'signup-form-submit':
+            Auth.handleSignup()
+            break 
+    default:
+        console.log(e.target)
     }
-
 }
 
 addTaskButton.addEventListener("click", () => {
     toggleNewFormButton()
 });
-
-
-
 
 function renderCirlce(percentCompleted) {
     const ptag = document.getElementById('top-doc')
@@ -124,33 +93,31 @@ function renderCirlce(percentCompleted) {
 }
 
 function circle(percentCompleted) {
-    return `
-    <div class="square">
-        <text class="text-completed">Completed</text>
-        <svg x="45" y="45" viewBox="0 0 36 36" class="circular-chart">
-            <path class="circle"
-            stroke-dasharray="${percentCompleted}, 100"
-            
-                d="M18 2.0845
-                a 15.9155 15.9155 0 0 1 0 31.831
-                a 15.9155 15.9155 0 0 1 0 -31.831"
-            />
-        <text x="18" y="20.35" class="percentage">${parseInt(percentCompleted)}%</text>
-        </svg>
-    </div>
-    `   
+    
+    return `<div class="square">
+    <text class="text-completed">Completed</text>
+    <svg x="45" y="45" viewBox="0 0 36 36" class="circular-chart">
+    <path class="circle"
+    stroke-dasharray="${percentCompleted}, 100"
+    
+    d="M18 2.0845
+    a 15.9155 15.9155 0 0 1 0 31.831
+    a 15.9155 15.9155 0 0 1 0 -31.831"
+    />
+    <text x="18" y="20.35" class="percentage">${parseInt(percentCompleted)}%</text>
+    </svg>
+    </div>`
+
 }
 
 function updateRenderedCircle(percentCompleted) {
     const circleElm = document.querySelector('.circle')
-    circleElm.style.strokeDasharray=`${percentCompleted}`
+    circleElm.style.strokeDasharray=`${percentCompleted}, 100`
     const circleTextElm = document.querySelector('.percentage')
     console.log(parseInt(percentCompleted))
+    console.log('update rendered circle')
     circleTextElm.innerHTML = `${parseInt(percentCompleted)}%`
-    // console.log('here')
 }
-
-
     
 // new task form display
 function getAllCategories() {
@@ -207,7 +174,6 @@ function toggleNewFormButton() {
     addTask = !addTask;
       if (addTask) {
         taskForm.style.display = "block";
-        // document.querySelector('#category').placeholder = categoryNames
       } else {
         taskForm.style.display = "none";
       }
@@ -219,10 +185,6 @@ function clearNewTaskForm() {
 }
 
 function clearAuthForm() {
-    // const emailInput = document.getElementById(".login-form-email")
-    // const passwordInput = document.getElementById(".login-form-password")
-    // emailInput.value = ""
-    // passwordInput.value = ""
     const inputTextAll = document.querySelectorAll(".auth-form-input")
     inputTextAll.forEach( inputText => inputText.value = "")   
 }
