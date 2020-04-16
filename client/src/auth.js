@@ -78,8 +78,10 @@ class Auth {
                     // Task.getTasks()
                 }
             })
+            .catch(alert)
         } else {
             console.log("hmm.")
+            // console.log(alert)
         }
     }
 

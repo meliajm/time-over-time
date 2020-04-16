@@ -109,21 +109,27 @@ class Task {
     e.preventDefault()
     const categoryName = getCategoryName()
     const taskContent = getTaskContent()
-    let strongParams = {
+    
+    if (taskContent && categoryName !=='Choose your category') {
+      let strongParams = {
         category: {name: categoryName},
         task: {
             content: Formatter.titleize(taskContent),
         }
-    }
-    Api.post('/tasks', strongParams)
-    .then(data => {
+      }
+
+      Api.post('/tasks', strongParams)
+      .then(data => {
         let task = new Task(data)
         task.render()
         
         clearNewTaskForm()
         toggleNewFormButton()
         Task.apiCallUpdateRenderedCircle()
-    })
+      })
+    } else {
+      console.log("You need to pick a category and enter in a task's content")
+    }
   }
 
   static apiCallUpdateRenderedCircle() {
