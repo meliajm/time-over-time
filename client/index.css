@@ -88,6 +88,7 @@ html {
 }
 
 
+
 .task-list {
   display: grid;
   grid-template-rows: auto;
@@ -98,10 +99,41 @@ html {
   /* padding: 1px; */
 }
 
+
+
+/* .month-card { */
+  /* display: grid; */
+  /* grid-template-columns: auto auto auto auto auto auto auto; */
+  /* grid-gap: 1px; */
+  /* background-color: #0180ff; */
+  /* background-color: #df99f5; */
+  /* padding: 1px; */
+/* } */
+
+.containerz {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 100px 200px 100px;
+
+  grid-template-areas:
+        "head head2 . side"
+        "main main2 . side"
+        "footer footer footer footer";
+}
+
+.month-header {
+  grid-area: header;
+}
+
 .month-card {
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto;
-  grid-gap: 1px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  /* grid-gap: 1px; */
+  grid-template-rows: 50px auto;
+  grid-template-areas:
+        "header header header header header header header"
+        ;
   /* background-color: #0180ff; */
   /* background-color: #df99f5; */
   /* padding: 1px; */

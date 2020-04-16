@@ -71,9 +71,9 @@ class Task {
 
   static createMonthCard(taskMonth) {
     let monthCard = document.createElement('div')
-    const ptag = document.createElement('p')
+    // const ptag = document.createElement('p')
     // monthCard.appendChild(ptag)
-    ptag.classList = 'month-header'
+    // ptag.classList = 'month-header'
     monthCard.id = taskMonth
     monthCard.classList.add('month-card')
     getTaskList.insertBefore(monthCard, null)
@@ -84,11 +84,14 @@ class Task {
   static addMonthNameToMonthCard() {
     const monthsObj = {'01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr', '05': 'May', '06': 'June', '07': 'Jul', '08': 'Aug', '09': 'Sep', '10': 'Oct', '11': 'Nov', '12': 'Dec'}
     const divs = document.querySelectorAll('.month-card')
-    const h = document.createElement('h5')
+    // const h = document.createElement('h5')
+    const pt = document.createElement('h2')
+    pt.classList = 'month-header'
     for (let i=0; i<divs.length; i++) {
       const monthName = divs[i].id
-      h.innerText = monthsObj[monthName]
-      divs[i].insertAdjacentText('afterbegin', h.innerText)
+      divs[i].appendChild(pt)
+      pt.innerText = monthsObj[monthName]
+      // divs[i].insertAdjacentText('afterbegin', pt.innerText)
     }
   }
 
