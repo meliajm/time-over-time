@@ -16,7 +16,7 @@ class Task {
 
   save() {
     if (Auth.currentUser.id === this.user_id) {
-      Task.all.unshift(this)
+      Task.all.push(this)
     }
   }
 
@@ -108,11 +108,6 @@ class Task {
     const dayAsNum = (new Date(bigCard.id)).getDay()
     h.innerText = daysObj[`${dayAsNum}`]
     bigCard.insertAdjacentElement('afterbegin', h)
-    // for (let i=0; i<divs.length; i++) {
-    //   const dayAsNum = (new Date(divs[i].id)).getDay()
-    //   h.innerText = daysObj[`${dayAsNum}`]
-    //   divs[i].insertAdjacentElement('afterbegin', h)
-    // }
   }
 
   static createNewTask(e) {
