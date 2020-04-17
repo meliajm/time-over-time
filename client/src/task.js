@@ -43,8 +43,6 @@ class Task {
 
   render() {
     const bigCard = document.getElementById(this.get_date) || Task.createBigCard(this.get_date)
-    // Task.createMonthCard(this.get_date)
-    // let date = new Date(this.get_date)
     let color = colorObj[`${this.category_id}`]
     bigCard.insertAdjacentHTML('beforeend', this.card(color))
     const btns = document.querySelectorAll('.completed-button')
@@ -65,9 +63,9 @@ class Task {
     let bigCard = document.createElement('div')
     bigCard.id = taskGetDate
     bigCard.classList.add('big-card')
-    monthCard.appendChild(bigCard)
+    // monthCard.appendChild(bigCard)
     // monthCard.insertBefore(bigCard, null)
-    // monthCard.insertAdjacentElement('afterbegin', bigCard)
+    monthCard.insertAdjacentElement('afterbegin', bigCard)
     Task.addWeekDayToBigCard(bigCard)
     return bigCard
   }
@@ -99,12 +97,7 @@ class Task {
   }
 
   static addWeekDayToBigCard(bigCard) {
-    // const div = bigCard.querySelectorAll('.big-card')
-    
     const h = document.createElement('h5')
-    // if (divs) {
-
-    // }
     const dayAsNum = (new Date(bigCard.id)).getDay()
     h.innerText = daysObj[`${dayAsNum}`]
     bigCard.insertAdjacentElement('afterbegin', h)
@@ -138,7 +131,6 @@ class Task {
   }
 
   static apiCallUpdateRenderedCircle() {
-    // debugger
     let completedTasksA = []
     let totalTasks = []
     Api.get('/tasks')
@@ -163,14 +155,11 @@ class Task {
   }
 
   static getTasks() {
-    // console.log(Auth.currentUser)
     if (Auth.currentUser.email) {
-
       let completedTasksA = []
       let totalTasks = []
       Api.get('/tasks')
       .then(function (data) {
-        
         data.forEach( task => new Task(task))
         Task.renderTasks()
         data.forEach( task => { 
@@ -181,7 +170,6 @@ class Task {
             totalTasks.push(task)
           }
         })
-        // if (totalTasks.length>0) {
         if (Task.all.length === 0) {
           renderCirlce(0)
         } else {
@@ -201,13 +189,11 @@ class Task {
   static clearTasksFromDom() {
     const divTaskList =  document.querySelector('.task-list')
     divTaskList.innerHTML = ''
-      
   }
 
   static clearDivSquare() {
     const divSquare = document.querySelector('div.square')
     divSquare.innerHTML = ""
-
   }
 
   static deleteTask(event) {
@@ -235,10 +221,6 @@ class Task {
       })
       .then(function() {
         Task.apiCallUpdateRenderedCircle()
-        // renderCirlce(percentCompleted)
-        // renderCirlce((completedTasksArray.length + 1)/ totalTasks * 100)
-        // updateRenderedCircle((completedTasksArray.length + 1)/ totalTasks * 100)
-
       })
       .catch(errors => console.log(errors))
   }
