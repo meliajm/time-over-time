@@ -130,7 +130,6 @@ class Task {
           } else {
             updateRenderedCircle(completedTasksA.length / totalTasks.length * 100)
           }
-      
       })
   }
 
@@ -151,11 +150,11 @@ class Task {
       const totalTasks = []
       Api.get('/tasks')
       .then(function (data) {
-        data.forEach( task => new Task(task))
-        Task.renderTasks()
-        data.forEach( task => { 
+        data.forEach( task => {
+          new Task(task)
           Task.getArraysForRenderingCircle(task, completedTasksA, totalTasks)
         })
+        Task.renderTasks()
         if (Task.all.length === 0) {
           renderCirlce(0)
         } else {
@@ -187,17 +186,11 @@ class Task {
     Api.delete(`/tasks/${eventID}`)
     .then(function () {
         const allDeleteButtons = document.querySelectorAll('.delete-button')
-        // use iterator
         allDeleteButtons.forEach( delBtn => {
           if (delBtn.dataset.id === eventID) {
             delBtn.parentNode.remove()
           }
-        })
-      //   for (let i=0; i<allDeleteButtons.length; i++) {
-      //       if (allDeleteButtons[i].dataset.id === eventID) {
-      //       allDeleteButtons[i].parentElement.remove()
-      //   }
-      // }
+        })      
       Task.apiCallUpdateRenderedCircle()      
     })
   }
@@ -219,7 +212,6 @@ class Task {
   
   static renderCompleted(json) {
     const allCompletedButtons = document.querySelectorAll('.completed-button')
-    // use iterator
     allCompletedButtons.forEach( completedBtn => {
       if (parseInt(completedBtn.dataset.id) === json.id) {
         Task.colorTask(json, completedBtn)

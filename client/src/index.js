@@ -111,24 +111,22 @@ function circle(percentCompleted) {
 }
 
 function updateRenderedCircle(percentCompleted) {
+
+    const circleElm = document.querySelector('.circle')
+    const circleTextElm = document.querySelector('.percentage')
     
     if (percentCompleted === 0) {
-        const circleElm = document.querySelector('.circle')
         circleElm.style.strokeDasharray='0, 100'
-        const circleTextElm = document.querySelector('.percentage')
         console.log(parseInt(percentCompleted))
         console.log('update rendered circle a')
-        circleTextElm.innerHTML = `${parseInt(percentCompleted)}%`
     }
     
     else {
-        const circleElm = document.querySelector('.circle')
         circleElm.style.strokeDasharray=`${percentCompleted}, 100`
-        const circleTextElm = document.querySelector('.percentage')
         console.log(parseInt(percentCompleted))
         console.log('update rendered circle b')
-        circleTextElm.innerHTML = `${parseInt(percentCompleted)}%`
     }
+    circleTextElm.innerHTML = `${parseInt(percentCompleted)}%`
 }
     
 // new task form display
