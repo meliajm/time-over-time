@@ -30,7 +30,6 @@ class Auth {
     }
 
     static handleLogin() {
-        // let bool = 'do not rerender circle only the one circle needed'
         const email = document.getElementById('login-form-email').value 
         const password = document.getElementById('login-form-password').value
 
@@ -75,13 +74,11 @@ class Auth {
                     this.setCurrentUser(response.current_user)
                     Nav.resetNav() 
                     renderCirlce(0)
-                    // Task.getTasks()
                 }
             })
             .catch(alert)
         } else {
             console.log("hmm.")
-            // console.log(alert)
         }
     }
 
