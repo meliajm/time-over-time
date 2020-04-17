@@ -122,9 +122,7 @@ class Task {
     const totalTasks = []
     Api.get('/tasks')
       .then(function (data) {
-        data.forEach( task => {
-          Task.getArraysForRenderingCircle(task, completedTasksA, totalTasks)
-        })
+        data.forEach( task => Task.getArraysForRenderingCircle(task, completedTasksA, totalTasks))
       })
       .then(function() {
           if (completedTasksA.length === 0) {
@@ -135,13 +133,6 @@ class Task {
       
       })
   }
-
-  // if (task.completed === true && task.user_id === Auth.currentUser.id) {
-  //   completedTasksA.push(task)
-  // }
-  // if (task.user_id === Auth.currentUser.id) {
-  //   totalTasks.push(task)
-  // }
 
   static getArraysForRenderingCircle(task, arrOne, arrTwo) {
     const completedTasksA = arrOne
@@ -197,11 +188,16 @@ class Task {
     .then(function () {
         const allDeleteButtons = document.querySelectorAll('.delete-button')
         // use iterator
-        for (let i=0; i<allDeleteButtons.length; i++) {
-            if (allDeleteButtons[i].dataset.id === eventID) {
-            allDeleteButtons[i].parentElement.remove()
-        }
-      }
+        allDeleteButtons.forEach( delBtn => {
+          if (delBtn.dataset.id === eventID) {
+            delBtn.parentNode.remove()
+          }
+        })
+      //   for (let i=0; i<allDeleteButtons.length; i++) {
+      //       if (allDeleteButtons[i].dataset.id === eventID) {
+      //       allDeleteButtons[i].parentElement.remove()
+      //   }
+      // }
       Task.apiCallUpdateRenderedCircle()      
     })
   }
@@ -224,11 +220,11 @@ class Task {
   static renderCompleted(json) {
     const allCompletedButtons = document.querySelectorAll('.completed-button')
     // use iterator
-    for (let i=0; i<allCompletedButtons.length; i++) {
-      if (parseInt(allCompletedButtons[i].dataset.id) === json.id) {
-        Task.colorTask(json, allCompletedButtons[i])
+    allCompletedButtons.forEach( completedBtn => {
+      if (parseInt(completedBtn.dataset.id) === json.id) {
+        Task.colorTask(json, completedBtn)
       }
-    }
+    })
   }
 
   static colorTask(json, button) {
