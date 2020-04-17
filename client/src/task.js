@@ -58,7 +58,7 @@ class Task {
   static createBigCard(taskGetDate) {
     const taskMonth = taskGetDate.slice(0, 2)
     const monthCard = document.getElementById(taskMonth) || Task.createMonthCard(taskMonth)
-    let bigCard = document.createElement('div')
+    const bigCard = document.createElement('div')
     bigCard.id = taskGetDate
     bigCard.classList.add('big-card')
     monthCard.insertAdjacentElement('afterbegin', bigCard)
@@ -67,29 +67,21 @@ class Task {
   }
 
   static createMonthCard(taskMonth) {
-
-    let monthCard = document.createElement('div')
-    // const ptag = document.createElement('p')
-    // monthCard.appendChild(ptag)
-    // ptag.classList = 'month-header'
+    const monthCard = document.createElement('div')
     monthCard.id = taskMonth
     monthCard.classList.add('month-card')
-    // getTaskList.insertBefore(monthCard, null)
     getTaskList.insertAdjacentElement('afterbegin', monthCard)
-    // debugger
     Task.addMonthNameToMonthCard(monthCard)
     return monthCard
   }
 
   static addMonthNameToMonthCard(monthCard) {
     const monthsObj = {'01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr', '05': 'May', '06': 'June', '07': 'Jul', '08': 'Aug', '09': 'Sep', '10': 'Oct', '11': 'Nov', '12': 'Dec'}
-    // const divs = document.querySelectorAll('.month-card')
-    // const h = document.createElement('h5')
-    const pt = document.createElement('h2')
-    pt.classList = 'month-header'
+    const h2 = document.createElement('h2')
+    h2.classList = 'month-header'
     const monthName = monthCard.id 
-    pt.innerText = monthsObj[monthName]
-    monthCard.appendChild(pt) 
+    h2.innerText = monthsObj[monthName]
+    monthCard.appendChild(h2) 
   }
 
   static addWeekDayToBigCard(bigCard) {
@@ -111,7 +103,6 @@ class Task {
             content: Formatter.titleize(taskContent),
         }
       }
-
       Api.post('/tasks', strongParams)
       .then(data => {
         let task = new Task(data)
@@ -127,17 +118,12 @@ class Task {
   }
 
   static apiCallUpdateRenderedCircle() {
-    let completedTasksA = []
-    let totalTasks = []
+    const completedTasksA = []
+    const totalTasks = []
     Api.get('/tasks')
       .then(function (data) {
         data.forEach( task => {
-          if (task.completed === true && task.user_id === Auth.currentUser.id) {
-            completedTasksA.push(task)
-          }
-          if (task.user_id === Auth.currentUser.id) {
-            totalTasks.push(task)
-          }
+          Task.getArraysForRenderingCircle(task, completedTasksA, totalTasks)
         })
       })
       .then(function() {
@@ -150,21 +136,34 @@ class Task {
       })
   }
 
+  // if (task.completed === true && task.user_id === Auth.currentUser.id) {
+  //   completedTasksA.push(task)
+  // }
+  // if (task.user_id === Auth.currentUser.id) {
+  //   totalTasks.push(task)
+  // }
+
+  static getArraysForRenderingCircle(task, arrOne, arrTwo) {
+    const completedTasksA = arrOne
+    const totalTasks = arrTwo
+    if (task.completed === true && task.user_id === Auth.currentUser.id) {
+      completedTasksA.push(task)
+    }
+    if (task.user_id === Auth.currentUser.id) {
+      totalTasks.push(task)
+    }
+  }
+
   static getTasks() {
     if (Auth.currentUser.email) {
-      let completedTasksA = []
-      let totalTasks = []
+      const completedTasksA = []
+      const totalTasks = []
       Api.get('/tasks')
       .then(function (data) {
         data.forEach( task => new Task(task))
         Task.renderTasks()
         data.forEach( task => { 
-          if (task.completed === true && task.user_id === Auth.currentUser.id) {
-            completedTasksA.push(task)
-          }
-          if (task.user_id === Auth.currentUser.id) {
-            totalTasks.push(task)
-          }
+          Task.getArraysForRenderingCircle(task, completedTasksA, totalTasks)
         })
         if (Task.all.length === 0) {
           renderCirlce(0)
@@ -197,6 +196,7 @@ class Task {
     Api.delete(`/tasks/${eventID}`)
     .then(function () {
         const allDeleteButtons = document.querySelectorAll('.delete-button')
+        // use iterator
         for (let i=0; i<allDeleteButtons.length; i++) {
             if (allDeleteButtons[i].dataset.id === eventID) {
             allDeleteButtons[i].parentElement.remove()
@@ -223,6 +223,7 @@ class Task {
   
   static renderCompleted(json) {
     const allCompletedButtons = document.querySelectorAll('.completed-button')
+    // use iterator
     for (let i=0; i<allCompletedButtons.length; i++) {
       if (parseInt(allCompletedButtons[i].dataset.id) === json.id) {
         Task.colorTask(json, allCompletedButtons[i])
