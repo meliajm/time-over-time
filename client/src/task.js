@@ -16,7 +16,7 @@ class Task {
 
   save() {
     if (Auth.currentUser.id === this.user_id) {
-      Task.all.push(this)
+      Task.all.unshift(this)
     }
   }
 
@@ -38,7 +38,7 @@ class Task {
   }
 
   static renderTasks() {
-    Task.all.reverse().forEach(task => task.render())
+    Task.all.forEach(task => task.render())
   }
 
   render() {
@@ -60,49 +60,59 @@ class Task {
   static createBigCard(taskGetDate) {
     const taskMonth = taskGetDate.slice(0, 2)
     const monthCard = document.getElementById(taskMonth) || Task.createMonthCard(taskMonth)
+    
     // let monthCards = getTaskList.querySelectorAll('.month-card')
     let bigCard = document.createElement('div')
     bigCard.id = taskGetDate
     bigCard.classList.add('big-card')
     monthCard.appendChild(bigCard)
-    Task.addWeekDayToBigCard()
+    // monthCard.insertBefore(bigCard, null)
+    // monthCard.insertAdjacentElement('afterbegin', bigCard)
+    Task.addWeekDayToBigCard(bigCard)
     return bigCard
   }
 
   static createMonthCard(taskMonth) {
+
     let monthCard = document.createElement('div')
     // const ptag = document.createElement('p')
     // monthCard.appendChild(ptag)
     // ptag.classList = 'month-header'
     monthCard.id = taskMonth
     monthCard.classList.add('month-card')
-    getTaskList.insertBefore(monthCard, null)
-    Task.addMonthNameToMonthCard()
+    // getTaskList.insertBefore(monthCard, null)
+    getTaskList.insertAdjacentElement('afterbegin', monthCard)
+    // debugger
+    Task.addMonthNameToMonthCard(monthCard)
     return monthCard
   }
 
-  static addMonthNameToMonthCard() {
+  static addMonthNameToMonthCard(monthCard) {
     const monthsObj = {'01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr', '05': 'May', '06': 'June', '07': 'Jul', '08': 'Aug', '09': 'Sep', '10': 'Oct', '11': 'Nov', '12': 'Dec'}
-    const divs = document.querySelectorAll('.month-card')
+    // const divs = document.querySelectorAll('.month-card')
     // const h = document.createElement('h5')
     const pt = document.createElement('h2')
     pt.classList = 'month-header'
-    for (let i=0; i<divs.length; i++) {
-      const monthName = divs[i].id
-      divs[i].appendChild(pt)
-      pt.innerText = monthsObj[monthName]
-      // divs[i].insertAdjacentText('afterbegin', pt.innerText)
-    }
+    const monthName = monthCard.id 
+    pt.innerText = monthsObj[monthName]
+    monthCard.appendChild(pt) 
   }
 
-  static addWeekDayToBigCard() {
-    const divs = document.querySelectorAll('.big-card')
+  static addWeekDayToBigCard(bigCard) {
+    // const div = bigCard.querySelectorAll('.big-card')
+    
     const h = document.createElement('h5')
-    for (let i=0; i<divs.length; i++) {
-      const dayAsNum = (new Date(divs[i].id)).getDay()
-      h.innerText = daysObj[`${dayAsNum}`]
-      divs[i].insertAdjacentElement('afterbegin', h)
-    }
+    // if (divs) {
+
+    // }
+    const dayAsNum = (new Date(bigCard.id)).getDay()
+    h.innerText = daysObj[`${dayAsNum}`]
+    bigCard.insertAdjacentElement('afterbegin', h)
+    // for (let i=0; i<divs.length; i++) {
+    //   const dayAsNum = (new Date(divs[i].id)).getDay()
+    //   h.innerText = daysObj[`${dayAsNum}`]
+    //   divs[i].insertAdjacentElement('afterbegin', h)
+    // }
   }
 
   static createNewTask(e) {
