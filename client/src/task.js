@@ -58,13 +58,9 @@ class Task {
   static createBigCard(taskGetDate) {
     const taskMonth = taskGetDate.slice(0, 2)
     const monthCard = document.getElementById(taskMonth) || Task.createMonthCard(taskMonth)
-    
-    // let monthCards = getTaskList.querySelectorAll('.month-card')
     let bigCard = document.createElement('div')
     bigCard.id = taskGetDate
     bigCard.classList.add('big-card')
-    // monthCard.appendChild(bigCard)
-    // monthCard.insertBefore(bigCard, null)
     monthCard.insertAdjacentElement('afterbegin', bigCard)
     Task.addWeekDayToBigCard(bigCard)
     return bigCard
