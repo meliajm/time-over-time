@@ -7,9 +7,9 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    # origins 'http://localhost:8000' https://time-over-time.herokuapp.com 
+    origins 'http://localhost:8000' 
     # origins 'https://frosty-haibt-5a7d7d.netlify.app/'
-    origins '*'
+    # origins '*'
 
     resource '*',
       headers: :any,
