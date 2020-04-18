@@ -7,10 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-# a = Category.create(name: 'Mental Health')
-# b = Category.create(name: 'Physical Health')
+a = Category.create(name: 'Mental Health')
+b = Category.create(name: 'Physical Health')
+c = Category.create(name: 'Emotional Health')
 # c = Category.create(name: 'House Chores')
-# d = Category.create(name: 'Errands')
+d = Category.create(name: 'Errands')
+e = Category.create(name: 'Chores')
+f = Category.create(name: 'Learning!')
+g = Category.create(name: 'Relaxing')
+e = Category.create(name: 'Working')
 
 # task_d = Task.new(content: "Go to grocery", by_when: "2020-04-30T20:56:36.024Z", category: d)
 # need to create or save now since using new
