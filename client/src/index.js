@@ -2,7 +2,9 @@ let tasks = []
 const categoryNames = []
 
 let addTask = false
-const colorObj = {1: 'dodger', 2: 'blue', 11: 'royal', 14: 'sky', 15: 'selective', 16: 'sandstorm', 17: 'minion', 18: 'flavescent'}
+// const colorObj = {1: 'dodger', 2: 'blue', 11: 'royal', 14: 'sky', 15: 'selective', 16: 'sandstorm', 17: 'minion', 18: 'flavescent'}
+const colorObj = {1: 'dodger', 2: 'blue', 3: 'royal', 4: 'sky', 5: 'selective', 6: 'sandstorm', 7: 'minion', 8: 'flavescent'}
+
 const daysObj = {0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday'}
 
 const main = document.getElementById('main')
