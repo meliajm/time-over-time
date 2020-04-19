@@ -1,6 +1,6 @@
 class Api {
-    // static base_url = 'http://localhost:3000'
-    static base_url = 'https://time-over-time.herokuapp.com'
+    static base_url = 'http://localhost:3000'
+    // static base_url = 'https://time-over-time.herokuapp.com'
 
     static options = {
         credentials: 'include'
