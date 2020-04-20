@@ -70,9 +70,11 @@ class Auth {
                 if (response.error) {
                     console.log(response.error)
                 } else {
-                    this.handleResponse.bind(this)
-                    this.setCurrentUser(response.current_user)
-                    Nav.resetNav() 
+                    console.log('here????????????')
+                    this.handleResponse.call(this, response)
+                    console.log(this)
+                    // this.setCurrentUser(response.current_user)
+                    // Nav.resetNav() 
                     renderCirlce(0)
                 }
             })
@@ -92,6 +94,7 @@ class Auth {
         if (response.error) {
             console.log(response.error)
         } else {
+            console.log('here?')
             this.setCurrentUser(new User(response.current_user))
             Nav.resetNav()
         }

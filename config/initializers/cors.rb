@@ -7,8 +7,9 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'http://localhost:8000' 
-    # origins 'https://frosty-haibt-5a7d7d.netlify.app/'
+    # origins 'localhost:8000' 
+    # origins 'frosty-haibt-5a7d7d.netlify.app/'
+    origins 'affectionate-joliot-6732dc.netlify.app'
     # origins '*'
 
     resource '*',
@@ -16,6 +17,11 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       methods: [:get, :post, :put, :patch, :delete, :options, :head],
       credentials: true
   end
+
+  allow do
+    origins  'localhost:8000' 
+  end
+
 end
 
 
