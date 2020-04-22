@@ -61,7 +61,7 @@ class Task {
     const bigCard = document.createElement('div')
     bigCard.id = taskGetDate
     bigCard.classList.add('big-card')
-    monthCard.insertAdjacentElement('afterbegin', bigCard)
+    monthCard.insertAdjacentElement('beforeend', bigCard)
     Task.addWeekDayToBigCard(bigCard)
     return bigCard
   }
@@ -91,12 +91,16 @@ class Task {
     bigCard.insertAdjacentElement('afterbegin', h)
   }
 
+  
+
   static createNewTask(e) {
     e.preventDefault()
     const categoryName = getCategoryName()
     const taskContent = getTaskContent()
-    
-    if (taskContent && categoryName !=='Choose your category') {
+    // fruits.includes("Mango");
+    if (taskContent && categoryName !=='Choose your category' && categoryName==='Mental Health' 
+    || categoryName==='Physical Health' || categoryName==='Relaxing' || categoryName==='Emotional Health' ||
+    categoryName==='Learning!' || categoryName==='Chores' || categoryName==='Working' || categoryName==='Errands') {
       let strongParams = {
         category: {name: categoryName},
         task: {

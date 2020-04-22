@@ -64,10 +64,42 @@ function handleBodyClick(e) {
         case "signup-form":
             handleClick(e)
             break 
+        case "order-button":
+            someFunction()
+            break
         default:
             console.log(e.target)
         }
     }
+
+function someFunction() {
+    Task.clearTasksFromDom()
+    Task.all.sort(function(a, b) {
+        if (a.content < b.content) {
+            return -1
+        } 
+        if (a.content > b.content) {
+            return 1
+        }
+        return 0
+    }).forEach(task => task.render())
+}
+
+
+
+// items.sort(function(a, b) {
+//     var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+//     var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+//     if (nameA < nameB) {
+//       return -1;
+//     }
+//     if (nameA > nameB) {
+//       return 1;
+//     }
+  
+//     // names must be equal
+//     return 0;
+//   });
     
 function handleClick(e) {
     switch (e.target.id) {
