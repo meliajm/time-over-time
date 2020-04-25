@@ -8,6 +8,7 @@ const colorObj = {1: 'dodger', 2: 'blue', 3: 'royal', 4: 'sky', 5: 'selective', 
 const daysObj = {0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday'}
 
 const main = document.getElementById('main')
+const body = document.getElementById('body')
 const addTaskButton = document.querySelector('#new-task-button')
 const taskForm = document.querySelector('.container')
 const getFormInfo = document.querySelector('.add-task-form')
@@ -47,6 +48,10 @@ function attachListenerToMain() {
     main.addEventListener('click', handleBodyClick)
 }
 
+function attachListenerToMain() {
+    body.addEventListener('click', handleBodyClick)
+}
+
 function attachListenerToNav() {
     const nav = document.getElementById('nav')
     nav.addEventListener('click', handleBodyClick)
@@ -65,6 +70,7 @@ function handleBodyClick(e) {
             handleClick(e)
             break 
         case "order-button":
+            console.log('click?')
             someFunction()
             break
         default:
