@@ -97,10 +97,13 @@ class Task {
     e.preventDefault()
     const categoryName = getCategoryName()
     const taskContent = getTaskContent()
+    console.log('create new task')
+    let catNames = categoryNames.map(cat => (cat.name))
+  
     // fruits.includes("Mango");
-    if (taskContent && categoryName !=='Choose your category' && categoryName==='Mental Health' 
-    || categoryName==='Physical Health' || categoryName==='Relaxing' || categoryName==='Emotional Health' ||
-    categoryName==='Learning!' || categoryName==='Chores' || categoryName==='Working' || categoryName==='Errands') {
+    if (taskContent && categoryName !=='Choose your category' && catNames.includes(categoryName))
+    //categoryName==='Mental Health' || categoryName==='Physical Health' || categoryName==='Relaxing' || categoryName==='Emotional Health' || categoryName==='Learning!' || categoryName==='Chores' || categoryName==='Working' || categoryName==='Errands') 
+        {
       let strongParams = {
         category: {name: categoryName},
         task: {

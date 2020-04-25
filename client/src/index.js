@@ -21,6 +21,7 @@ const getCategoryName = () => document.getElementById('category').value
 document.addEventListener('DOMContentLoaded', function () {
     init()
     getAllCategories()
+    console.log('about to create task')
     getFormInfo.addEventListener('submit', Task.createNewTask)
     
   })
@@ -73,8 +74,13 @@ function handleBodyClick(e) {
             console.log('click?')
             someFunction()
             break
+        case "submit":
+            
+            handleClick(e)
+            console.log('create submit')
+            break
         default:
-            console.log(e.target)
+            console.log('handle body click', e.target)
         }
     }
 
@@ -118,6 +124,9 @@ function handleClick(e) {
         case 'signup-form-submit':
             Auth.handleSignup()
             break 
+        case 'task-form':
+            Task.createNewTask(e)
+            break
     default:
         console.log(e.target)
     }
